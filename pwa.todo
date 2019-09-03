@@ -1,0 +1,16 @@
+PWA Project:
+    A simple project to take PWA concepts for a spin, by building a vinyl record lookup service, backed by Discogs.
+
+Front-end:
+    ☐ Select CSS(-in-JS) framework
+    ☐ Select JS/templating framework
+    ☐ Bundle with webpack
+    ☐ Add test harness
+
+Back-end:
+    ☐ Select host
+    ☐ Setup deployment to host
+    ☐ Setup local server
+    ☐ Implement basic shell (no API content)
+    ☐ Wire-up API calls
+    ☐ Implement streaming response pattern
