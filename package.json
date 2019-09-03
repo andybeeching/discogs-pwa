@@ -2,9 +2,13 @@
   "name": "pwa",
   "version": "1.0.0",
   "description": "A PWA to display Discogs vinyl information ",
-  "main": "app.js",
+  "main": "src/app.mjs",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode development --config webpack.server.config.js && webpack --mode development",
+    "build:server": "webpack --mode development --config webpack.server.config.js",
+    "build:app": "webpack --mode development --config webpack.config.js",
+    "start": "nodemon dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,20 +21,24 @@
   },
   "homepage": "https://github.com/andybeeching/pwa#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "preact": "^8.5.2",
-    "preact-render-to-string": "^4.1.0",
-    "preact-router": "^2.6.1"
+    "express": "^4.17.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
-    "babel-plugin-transform-jsx": "^2.0.0",
-    "babel-preset-env": "^1.7.0",
-    "file-loader": "^4.2.0",
-    "url-loader": "^2.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "nodemon": "^1.19.2",
+    "raw-loader": "^3.1.0",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7"
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-middleware": "^3.7.1",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-hot-server-middleware": "^0.6.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }
