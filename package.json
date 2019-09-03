@@ -1,0 +1,36 @@
+{
+  "name": "pwa",
+  "version": "1.0.0",
+  "description": "A PWA to display Discogs vinyl information ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andybeeching/pwa.git"
+  },
+  "author": "Andrew Beeching",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andybeeching/pwa/issues"
+  },
+  "homepage": "https://github.com/andybeeching/pwa#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "preact": "^8.5.2",
+    "preact-render-to-string": "^4.1.0",
+    "preact-router": "^2.6.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-jsx": "^2.0.0",
+    "babel-preset-env": "^1.7.0",
+    "file-loader": "^4.2.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
+  }
+}
