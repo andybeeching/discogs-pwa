@@ -4,15 +4,20 @@ PWA Project:
 Stack:
     ☐ Select CSS(-in-JS) framework
     ☐ Select JS/templating framework
+    ☐ Add Babel for transpilation
     ☐ Bundle with webpack
+        ☐ Impl separate dev + prod builds
+        ☐ Add middlewear hot relaoding
+        ☐ Improve current watch setup (spawn subprocesses?)
     ☐ Add test harness
     ☐ Add HMR
 
 Front-End:
     ☐ Landing page
+        ☐ Implement partials
     ☐ Search page
     ☐ Results page
-    ☐ History API
+    ☐ History API integration
 
 Back-end:
     ☐ Select host
