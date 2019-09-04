@@ -3,7 +3,7 @@ const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   entry: {
-    server: './src/server/server.js',
+    server: './src/server/server.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -15,19 +15,31 @@ module.exports = {
   watch: true,
   node: {
     // Need this when working with express, otherwise the build fails
-    __dirname: false,   // if you don't put this is, __dirname
-    __filename: false,  // and __filename return blank or /
+    __dirname: false, // if you don't put this is, __dirname
+    __filename: false // and __filename return blank or /
   },
-  externals: [nodeExternals()], // Need this to avoid error when working with Express
+  // Need this to avoid error when working with Express
+  externals: [nodeExternals()],
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          emitWarning: true,
+          failOnError: false,
+          failOnWarning: false
+        }
+      },
       {
         // Transpiles ES6-8 into ES5
         test: /\.m?js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
-            presets: ['@babel/preset-env']
+          presets: ['@babel/preset-env']
         }
       }
     ]
