@@ -1,0 +1,25 @@
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "standard",
+        "prettier",
+        "prettier/standard"
+    ],
+    "plugins": [
+        "import",
+        "prettier",
+        "standard"
+    ],
+    "rules": {
+        "max-len": ["error", 100],
+        "import/no-webpack-loader-syntax": "off",
+        "space-before-function-paren": 0,
+        "new-cap": 0,
+        "prettier/prettier": "error"
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    }
+}

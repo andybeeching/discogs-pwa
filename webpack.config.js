@@ -1,6 +1,6 @@
-const path = require("path")
+const path = require('path')
 const webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -18,11 +18,22 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
         test: /\.m?js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'eslint-loader',
         options: {
-            presets: ['@babel/preset-env']
+          emitWarning: true,
+          failOnError: false,
+          failOnWarning: false
+        }
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
         }
       },
       {
@@ -31,22 +42,19 @@ module.exports = {
         test: /\.html$/,
         use: [
           {
-            loader: "raw-loader",
+            loader: 'raw-loader'
           }
         ]
       },
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: ['style-loader', 'css-loader']
       },
       {
-       test: /\.(png|svg|jpg|gif)$/,
-       use: ['file-loader']
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
       }
     ]
   },
-  plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new CleanWebpackPlugin()
-  ]
+  plugins: [new webpack.NoEmitOnErrorsPlugin(), new CleanWebpackPlugin()]
 }
