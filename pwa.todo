@@ -4,12 +4,13 @@ PWA Project:
 Stack:
     ☐ Select CSS(-in-JS) framework
     ☐ Select JS/templating framework
-    ☐ Add Babel for transpilation
+    ✔ Add Babel for transpilation @done(19-09-04 15:40)
     ☐ Bundle with webpack
         ☐ Impl separate dev + prod builds
         ☐ Add middlewear hot relaoding
         ☐ Improve current watch setup (spawn subprocesses?)
-    ☐ Add test harness
+    ✔ Add test harness @done(19-09-04 15:40)
+    ☐ Add Husky hooks
     ☐ Add HMR
 
 Front-End:
@@ -22,7 +23,7 @@ Front-End:
 Back-end:
     ☐ Select host
     ☐ Setup deployment to host
-    ☐ Setup local server
+    ✔ Setup local server @done(19-09-04 15:40)
     ☐ Implement basic shell (no API content)
     ☐ Wire-up API calls
     ☐ Implement streaming response pattern
