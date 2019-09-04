@@ -2,13 +2,12 @@
   "name": "pwa",
   "version": "1.0.0",
   "description": "A PWA to display Discogs vinyl information ",
-  "main": "src/app.mjs",
   "private": true,
   "scripts": {
     "build": "webpack --mode development --config webpack.server.config.js && webpack --mode development",
     "build:server": "webpack --mode development --config webpack.server.config.js",
     "build:app": "webpack --mode development --config webpack.config.js",
-    "start": "nodemon dist/server.js",
+    "start": "nodemon ./dist/server.js --verbose",
     "lint": "eslint src -c .eslintrc.json --ext js",
     "test": "jest"
   },
@@ -29,12 +28,15 @@
   },
   "homepage": "https://github.com/andybeeching/pwa#readme",
   "dependencies": {
+    "@babel/runtime": "^7.5.5",
+    "@babel/runtime-corejs3": "^7.5.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",

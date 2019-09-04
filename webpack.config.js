@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -33,7 +33,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env']
+          configFile: './.babelrc'
         }
       },
       {
@@ -56,5 +56,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [new webpack.NoEmitOnErrorsPlugin(), new CleanWebpackPlugin()]
+  plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['!./dist/server.js'],
+      cleanOnceAfterBuildPatterns: ['!./dist/server.js']
+    })
+  ]
 }
