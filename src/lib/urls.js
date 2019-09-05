@@ -17,5 +17,5 @@ export function getArtistReleases(artistId) {
 }
 
 export function getRelease(releaseId) {
-  return `${PREFIX}/release/${releaseId}`
+  return `${PREFIX}/masters/${releaseId}`
 }

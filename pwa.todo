@@ -12,13 +12,19 @@ Stack:
     ✔ Add test harness @done(19-09-04 15:40)
     ☐ Add Husky hooks
     ☐ Add HMR
+    ☐ Figure out remote debugging for node, and front-end
 
 Front-End:
     ☐ Landing page
         ☐ Implement partials
-    ☐ Search page
+    ☐ Artist page
+    ☐ Release page
+        ☐ Handle pagination
     ☐ Results page
+        ☐ Handle pagination
+        ☐ Handle no results
     ☐ History API integration
+    ☐ Offline notification
 
 Back-end:
     ☐ Select host
@@ -31,5 +37,5 @@ Back-end:
     ☐ Implement node-fetch API client
     ☐ Wire-up API calls
     ☐ Implement some kind of caching
-    ☐ Figure out remote debugging
     ☐ Consider using Typescript or Flow annotations
+    ☐ Handle API call errors

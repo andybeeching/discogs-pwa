@@ -1,0 +1,82 @@
+{
+  "profile": "Kings of Convenience are an indie folk-pop duo from Bergen, Norway. Consisting of Erlend \u00d8ye and Eirik Glambek B\u00f8e, the musical group is known for their delicate tunes, calming voices, and intricately subtle guitar melodies. Both \u00d8ye and B\u00f8e sing in their tracks, and both of them compose.",
+  "releases_url": "https://api.discogs.com/artists/12634/releases",
+  "name": "Kings Of Convenience",
+  "namevariations": ["King Of Convenience"],
+  "uri": "https://www.discogs.com/artist/12634-Kings-Of-Convenience",
+  "members": [
+    {
+      "active": true,
+      "resource_url": "https://api.discogs.com/artists/82343",
+      "id": 82343,
+      "name": "Erlend \u00d8ye"
+    },
+    {
+      "active": true,
+      "resource_url": "https://api.discogs.com/artists/462316",
+      "id": 462316,
+      "name": "Eirik Glambek B\u00f8e"
+    }
+  ],
+  "urls": [
+    "http://www.kingsofconvenience.eu",
+    "http://www.astralwerks.com/koc/default.html",
+    "https://myspace.com/kingsofconvenience",
+    "http://www.kingsofconvenience.org",
+    "https://www.facebook.com/kingsofconvenience/"
+  ],
+  "images": [
+    {
+      "uri": "https://img.discogs.com/tMdbLtg-9l3OLnwWEq0gafCJ51g=/447x280/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-1512909405-4033.jpeg.jpg",
+      "height": 280,
+      "width": 447,
+      "resource_url": "https://img.discogs.com/tMdbLtg-9l3OLnwWEq0gafCJ51g=/447x280/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-1512909405-4033.jpeg.jpg",
+      "type": "primary",
+      "uri150": "https://img.discogs.com/hbOtN-uAwcQDzlLoGWyzgcwuvPU=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12634-1512909405-4033.jpeg.jpg"
+    },
+    {
+      "uri": "https://img.discogs.com/WlLMR8dXJvc6QKzfbpNOMppWkCI=/355x237/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-1191297158.jpeg.jpg",
+      "height": 237,
+      "width": 355,
+      "resource_url": "https://img.discogs.com/WlLMR8dXJvc6QKzfbpNOMppWkCI=/355x237/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-1191297158.jpeg.jpg",
+      "type": "secondary",
+      "uri150": "https://img.discogs.com/fCAPpq4pYHuXeqTgNDJCEooNiNI=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12634-1191297158.jpeg.jpg"
+    },
+    {
+      "uri": "https://img.discogs.com/rcgL8rtcdy4QQ9kzCooZF3UUGR4=/500x480/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-1191297180.jpeg.jpg",
+      "height": 480,
+      "width": 500,
+      "resource_url": "https://img.discogs.com/rcgL8rtcdy4QQ9kzCooZF3UUGR4=/500x480/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-1191297180.jpeg.jpg",
+      "type": "secondary",
+      "uri150": "https://img.discogs.com/V_IqlPDvnhsxa_igRREomA9XS2s=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12634-1191297180.jpeg.jpg"
+    },
+    {
+      "uri": "https://img.discogs.com/6CHF9OlHPwXYHLvQqP0WviMfWcw=/300x232/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-001.jpg.jpg",
+      "height": 232,
+      "width": 300,
+      "resource_url": "https://img.discogs.com/6CHF9OlHPwXYHLvQqP0WviMfWcw=/300x232/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-001.jpg.jpg",
+      "type": "secondary",
+      "uri150": "https://img.discogs.com/8CCg_Dm2ahag921JLrncuISacDQ=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12634-001.jpg.jpg"
+    },
+    {
+      "uri": "https://img.discogs.com/V6QdjqstQ0sMIDbzQOgR-Yep0vg=/400x512/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-002.jpg.jpg",
+      "height": 512,
+      "width": 400,
+      "resource_url": "https://img.discogs.com/V6QdjqstQ0sMIDbzQOgR-Yep0vg=/400x512/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-002.jpg.jpg",
+      "type": "secondary",
+      "uri150": "https://img.discogs.com/Ou3bx3lPhhAgIjf02SaongILpWU=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12634-002.jpg.jpg"
+    },
+    {
+      "uri": "https://img.discogs.com/PHwmRag7ZeXRbC8eg9dli36F3vw=/430x273/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-1147266786.jpeg.jpg",
+      "height": 273,
+      "width": 430,
+      "resource_url": "https://img.discogs.com/PHwmRag7ZeXRbC8eg9dli36F3vw=/430x273/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-1147266786.jpeg.jpg",
+      "type": "secondary",
+      "uri150": "https://img.discogs.com/l6lwguq6xNjjU3Gife2BOuG8-Qk=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12634-1147266786.jpeg.jpg"
+    }
+  ],
+  "resource_url": "https://api.discogs.com/artists/12634",
+  "id": 12634,
+  "data_quality": "Needs Vote",
+  "realname": "Eirik Glambek B\u00f8e & Erlend \u00d8ye"
+}
