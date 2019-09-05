@@ -24,11 +24,11 @@ export function releaseList(data) {
       return b.year - a.year
     })
 
-  return `<ul>
+  return `<ul class="grid">
         ${releases
           .map(
             item =>
-              `<li>
+              `<li class="grid-item">
                 <a data-year="${item.year}" href="/release/${item.id}">${item.title}</a>
                 <img src="${item.thumb}" />
                </li>`
