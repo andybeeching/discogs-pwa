@@ -25,5 +25,11 @@ Back-end:
     ☐ Setup deployment to host
     ✔ Setup local server @done(19-09-04 15:40)
     ☐ Implement basic shell (no API content)
+    ☐ Implement route-url matching
+    ✔ Implement streaming response pattern @done(19-09-04 19:22)
+    ☐ Implement ENV vars for secret key
+    ☐ Implement node-fetch API client
     ☐ Wire-up API calls
-    ☐ Implement streaming response pattern
+    ☐ Implement some kind of caching
+    ☐ Figure out remote debugging
+    ☐ Consider using Typescript or Flow annotations
