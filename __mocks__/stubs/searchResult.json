@@ -1,0 +1,55 @@
+{
+  "pagination": {
+    "per_page": 50,
+    "items": 4,
+    "page": 1,
+    "urls": {},
+    "pages": 1
+  },
+  "results": [
+    {
+      "thumb": "https://img.discogs.com/hbOtN-uAwcQDzlLoGWyzgcwuvPU=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12634-1512909405-4033.jpeg.jpg",
+      "title": "Kings Of Convenience",
+      "uri": "/artist/12634-Kings-Of-Convenience",
+      "master_url": null,
+      "cover_image": "https://img.discogs.com/tMdbLtg-9l3OLnwWEq0gafCJ51g=/447x280/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-12634-1512909405-4033.jpeg.jpg",
+      "resource_url": "https://api.discogs.com/artists/12634",
+      "master_id": null,
+      "type": "artist",
+      "id": 12634
+    },
+    {
+      "thumb": "",
+      "title": "Nigel Tilbury",
+      "uri": "/artist/448979-Nigel-Tilbury",
+      "master_url": null,
+      "cover_image": "https://img.discogs.com/c56b649f622bfb42c25387e1bb937645959102cf/images/spacer.gif",
+      "resource_url": "https://api.discogs.com/artists/448979",
+      "master_id": null,
+      "type": "artist",
+      "id": 448979
+    },
+    {
+      "thumb": "https://img.discogs.com/OYzHnovDTX2JJFNNkpTwPiQ2j2I=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-190-1398701549-5166.jpeg.jpg",
+      "title": "Erot",
+      "uri": "/artist/190-Erot",
+      "master_url": null,
+      "cover_image": "https://img.discogs.com/6vD3vwSqOy1IBZfUomZrnvX8HII=/600x411/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-190-1398701549-5166.jpeg.jpg",
+      "resource_url": "https://api.discogs.com/artists/190",
+      "master_id": null,
+      "type": "artist",
+      "id": 190
+    },
+    {
+      "thumb": "https://img.discogs.com/1uCh7VoMWBn5tMbev6F-fiKfnDk=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-1057738-1543729716-1125.jpeg.jpg",
+      "title": "Javiera Mena",
+      "uri": "/artist/1057738-Javiera-Mena",
+      "master_url": null,
+      "cover_image": "https://img.discogs.com/bsf66pxOKViBIrn8-jFAs9pVps8=/600x599/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-1057738-1543729716-1125.jpeg.jpg",
+      "resource_url": "https://api.discogs.com/artists/1057738",
+      "master_id": null,
+      "type": "artist",
+      "id": 1057738
+    }
+  ]
+}

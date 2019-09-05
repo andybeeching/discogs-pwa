@@ -6,14 +6,43 @@ import head from 'raw-loader!../partials/head.html'
 import nav from 'raw-loader!../partials/nav.html'
 import foot from 'raw-loader!../partials/foot.html'
 
+// temporary data stubs
+import searchResultStub from '../../__mocks__/stubs/searchResult.json'
+import releaseListResStub from '../../__mocks__/stubs/releaseList.json'
+import artistResStub from '../../__mocks__/stubs/artist.json'
+import releaseResStub from '../../__mocks__/stubs/release.json'
+
 const app = express()
 
-async function apiClient(param) {
-  return param
+// basic API client
+
+async function apiClient(url) {
+  let data
+
+  // stubbed API response
+  if (/database/.test(url)) {
+    data = searchResultStub
+  } else if (/releases/.test(url)) {
+    data = releaseListResStub
+  } else if (/artists/.test(url)) {
+    data = artistResStub
+  } else if (/masters/.test(url)) {
+    data = releaseResStub
+  }
+
+  return data || url
+
+  // fetch('https://example.com')
+  // .then(response => response.json())
+  // .then(data => {
+  //   console.log(data)
+  // })
+  // .catch(err => ...)
 }
 
-async function requestData(param) {
-  const res = await apiClient(param)
+// TODO: Implement cache lookup
+async function requestData(url) {
+  const res = await apiClient(url)
   return res
 }
 
@@ -41,7 +70,7 @@ app.get('/artist/:artistId', async (req, res) => {
 app.get('/release/:releaseId', async (req, res) => {
   res.write(head + nav)
   const data = await requestData(urls.getRelease(req.params.releaseId))
-  res.write(templates.artist(data))
+  res.write(templates.release(data))
   res.write(foot)
   res.end()
 })
@@ -49,7 +78,11 @@ app.get('/release/:releaseId', async (req, res) => {
 app.get('/search', async (req, res) => {
   res.write(head + nav)
   const data = await requestData(urls.getArtistSearch(req.query.q))
-  res.write(templates.artistsSearchResults(data))
+
+  if (data) {
+    res.write(templates.artistsSearchResults(data))
+  }
+
   res.write(foot)
   res.end()
 })
