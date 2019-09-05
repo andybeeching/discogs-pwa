@@ -2,6 +2,11 @@ import express from 'express'
 import * as templates from '../lib/templates.js'
 import * as urls from '../lib/urls.js'
 
+import webpack from 'webpack'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+import config from '../../webpack.config'
+
 import head from 'raw-loader!../partials/head.html'
 import nav from 'raw-loader!../partials/nav.html'
 import foot from 'raw-loader!../partials/foot.html'
@@ -13,6 +18,21 @@ import artistResStub from '../../__mocks__/stubs/artist.json'
 import releaseResStub from '../../__mocks__/stubs/release.json'
 
 const app = express()
+
+// statics
+app.use(express.static(__dirname))
+
+// Tell express to use the webpack-dev-middleware and use the webpack.config.js
+// configuration file as a base.
+const compiler = webpack(config)
+
+app.use(
+  webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath
+  })
+)
+
+app.use(webpackHotMiddleware(compiler))
 
 // basic API client
 
@@ -90,6 +110,7 @@ app.get('/search', async (req, res) => {
 const PORT = process.env.PORT || 8080
 
 app.listen(PORT, () => {
+  console.log(__dirname)
   console.log(`App listening to ${PORT}....`)
   console.log('Press Ctrl+C to quit.')
 })

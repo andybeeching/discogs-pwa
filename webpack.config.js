@@ -4,17 +4,20 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: [
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+      './src/index.js'
+    ]
   },
+  // watch: true,
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].js'
   },
-  target: 'web',
-  devtool: 'source-map',
   mode: 'development',
-  watch: true,
+  target: 'web',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -42,7 +45,7 @@ module.exports = {
         test: /\.html$/,
         use: [
           {
-            loader: 'raw-loader'
+            loader: 'html-loader'
           }
         ]
       },
@@ -57,6 +60,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ['!./dist/server.js'],
