@@ -33,7 +33,7 @@ export function artist(data) {
   return `
     <h2>${data.name}</h2>
     <p>${data.profile}</p>
-    <p>Members: ${explodeArtists(data.members)}</p>
+    ${data.members ? `<p>Members: ${explodeArtists(data.members)}</p>` : ''}
     <h3>Releases</h2>
   `
 }

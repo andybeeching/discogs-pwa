@@ -1,4 +1,6 @@
 import express from 'express'
+import fetch from 'node-fetch'
+import * as creds from './../lib/creds'
 import * as templates from '../lib/templates.js'
 import * as urls from '../lib/urls.js'
 
@@ -10,12 +12,6 @@ import config from '../../webpack.config'
 import head from 'raw-loader!../partials/head.html'
 import nav from 'raw-loader!../partials/nav.html'
 import foot from 'raw-loader!../partials/foot.html'
-
-// temporary data stubs
-import searchResultStub from '../../__mocks__/stubs/searchResult.json'
-import releaseListResStub from '../../__mocks__/stubs/releaseList.json'
-import artistResStub from '../../__mocks__/stubs/artist.json'
-import releaseResStub from '../../__mocks__/stubs/release.json'
 
 const app = express()
 
@@ -37,27 +33,15 @@ app.use(webpackHotMiddleware(compiler))
 // basic API client
 
 async function apiClient(url) {
-  let data
-
-  // stubbed API response
-  if (/database/.test(url)) {
-    data = searchResultStub
-  } else if (/releases/.test(url)) {
-    data = releaseListResStub
-  } else if (/artists/.test(url)) {
-    data = artistResStub
-  } else if (/masters/.test(url)) {
-    data = releaseResStub
-  }
-
-  return data || url
-
-  // fetch('https://example.com')
-  // .then(response => response.json())
-  // .then(data => {
-  //   console.log(data)
-  // })
-  // .catch(err => ...)
+  const res = await fetch(url, {
+    method: 'get',
+    headers: {
+      Authorization: `Discogs key=${creds.KEY}, secret=${creds.SECRET}`
+    }
+  })
+  const data = await res.json()
+  console.log('\x1b[33m%s\x1b[0m', JSON.stringify(data))
+  return data
 }
 
 // TODO: Implement cache lookup
