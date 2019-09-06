@@ -104,7 +104,7 @@ app.get('/search', async (req, res) => {
   const data = await requestData(urls.getArtistSearch(req.query.q))
 
   if (data) {
-    res.write(templates.artistsSearchResults(data))
+    res.write(templates.artistsSearchResults(data, req.query.q))
   }
 
   res.write(foot)
