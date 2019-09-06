@@ -3,39 +3,44 @@ PWA Project:
 
 Stack:
     ☐ Select CSS(-in-JS) framework
-    ☐ Select JS/templating framework
+    ✔ Select JS/templating framework @done(19-09-06 13:30)
     ✔ Add Babel for transpilation @done(19-09-04 15:40)
     ☐ Bundle with webpack
         ☐ Impl separate dev + prod builds
-        ☐ Add middlewear hot relaoding
+        ✔ Add middlewear hot relaoding @done(19-09-06 13:30)
         ☐ Improve current watch setup (spawn subprocesses?)
     ✔ Add test harness @done(19-09-04 15:40)
     ☐ Add Husky hooks
-    ☐ Add HMR
+    ✔ Add HMR @done(19-09-06 13:29)
     ☐ Figure out remote debugging for node, and front-end
 
 Front-End:
     ☐ Landing page
-        ☐ Implement partials
+        ✔ Implement partials @done(19-09-06 13:28)
     ☐ Artist page
+        ☐ Tweak measure to ensure it's not too long
     ☐ Release page
         ☐ Handle pagination
+        ☐ Handle large album image - from mobile up
     ☐ Results page
+        ☐ Handle no search results
         ☐ Handle pagination
         ☐ Handle no results
     ☐ History API integration
     ☐ Offline notification
+    ☐ Handle 404
+    ☐ Handle 5xx
 
 Back-end:
     ☐ Select host
     ☐ Setup deployment to host
     ✔ Setup local server @done(19-09-04 15:40)
-    ☐ Implement basic shell (no API content)
-    ☐ Implement route-url matching
+    ✔ Implement basic shell (no API content) @done(19-09-06 13:30)
+    ✔ Implement route-url matching @done(19-09-06 13:30)
     ✔ Implement streaming response pattern @done(19-09-04 19:22)
     ☐ Implement ENV vars for secret key
-    ☐ Implement node-fetch API client
-    ☐ Wire-up API calls
-    ☐ Implement some kind of caching
+    ✔ Implement node-fetch API client @done(19-09-06 13:30)
+    ✔ Wire-up API calls @done(19-09-06 13:30)
+    ✔ Implement some kind of caching @done(19-09-06 13:30)
     ☐ Consider using Typescript or Flow annotations
     ☐ Handle API call errors
