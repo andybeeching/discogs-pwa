@@ -1,5 +1,6 @@
-export function artistsSearchResults(data) {
+export function artistsSearchResults(data, query) {
   return `
+    ${query ? `<h2>Search results for "${query}"</h2>` : ''}
     <ul class="grid">
       ${data.results.map(item => getGridItem(item, 'artist')).join('')}
     </ul>
