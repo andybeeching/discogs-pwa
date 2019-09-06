@@ -7,7 +7,7 @@
     "build": "webpack --mode development --config webpack.server.config.js && webpack --mode development",
     "build:server": "webpack --mode development --config webpack.server.config.js",
     "build:app": "webpack --mode development --config webpack.config.js",
-    "start": "node ./dist/server.js --verbose",
+    "start": "nodemon ./dist/server.js --verbose",
     "lint": "eslint src -c .eslintrc.json --ext js",
     "test": "jest"
   },
@@ -30,7 +30,8 @@
   "dependencies": {
     "@babel/runtime": "^7.5.5",
     "@babel/runtime-corejs3": "^7.5.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",

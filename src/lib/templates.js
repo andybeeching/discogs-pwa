@@ -1,13 +1,41 @@
 export function artistsSearchResults(data) {
-  return `<ul>
-        ${data.results
-          .map(item => `<li><a href="/artist/${item.id}">${item.title}</a>`)
-          .join('')}
-    </ul>`
+  return `
+    <ul class="grid">
+      ${data.results.map(item => getGridItem(item, 'artist')).join('')}
+    </ul>
+  `
+}
+
+export function getGridItem(item, endpoint) {
+  return `
+    <li class="grid-item">
+      <a href="/${endpoint}/${item.id}">
+        <img src="${item.thumb}" />
+        <span class="desc">${item.title}</span>
+      </a>
+    </li>
+  `
+}
+
+export function explodeArtists(artists) {
+  return artists
+    .map((item, idx, arr) => {
+      const isLast = arr[idx + 1] === undefined
+      const leadingChars = idx > 0 && isLast ? 'and ' : ''
+      const trailingChars = !isLast && !leadingChars ? ', ' : ''
+
+      return `${leadingChars}<a href="/artist/${item.id}">${item.name}</a>${trailingChars}`
+    })
+    .join('')
 }
 
 export function artist(data) {
-  return `<p>${data.profile}</p>`
+  return `
+    <h2>${data.name}</h2>
+    <p>${data.profile}</p>
+    <p>Members: ${explodeArtists(data.members)}</p>
+    <h3>Releases</h2>
+  `
 }
 
 export function releaseList(data) {
@@ -24,37 +52,25 @@ export function releaseList(data) {
       return b.year - a.year
     })
 
-  return `<ul class="grid">
-        ${releases
-          .map(
-            item =>
-              `<li class="grid-item">
-                <a data-year="${item.year}" href="/release/${item.id}">${item.title}</a>
-                <img src="${item.thumb}" />
-               </li>`
-          )
-          .join('')}
-    </ul>`
+  return `
+    <ul class="grid">
+      ${releases.map(item => getGridItem(item, 'release')).join('')}
+    </ul>
+  `
 }
 
 export function release(data) {
   const { artists, tracklist, title, images } = data
 
-  return `<p>${title}</p>
-    <p>By ${artists
-      .map((item, idx, arr) => {
-        const isLast = arr[idx + 1] === undefined
-        const leadingChars = idx > 0 && isLast ? 'and ' : ''
-        const trailingChars = !isLast && !leadingChars ? ', ' : ''
-
-        return `${leadingChars}<a href="/artist/${item.id}">${item.name}</a>${trailingChars}`
-      })
-      .join('')}
-    </p>
+  return `
+    <h2>${title}</h2>
+    <p>By ${explodeArtists(artists)}</p>
     <div>
       <img src="${images[0].resource_url}" />
     </div>
+    <h3>Tracklist</h3>
     <ol>
         ${tracklist.map(item => `<li>${item.title}</a>`).join('')}
-    </ol>`
+    </ol>
+  `
 }
