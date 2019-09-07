@@ -20,7 +20,8 @@ async function apiClient(url) {
     method: 'get',
     headers: {
       Authorization: `Discogs key=${process.env.APIKEY}, secret=${process.env.APISECRET}`,
-      'User-Agent': process.env.USER_AGENT
+      'User-Agent': process.env.USER_AGENT,
+      Accept: 'application/vnd.discogs.v2.discogs+json'
     }
   })
 

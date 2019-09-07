@@ -58,12 +58,15 @@ app.get('/release/:releaseId', async (req, res) => {
   res.end()
 })
 
+// TODO: redirect initial results to page 1
 app.get('/search', async (req, res) => {
   res.write(head + nav)
-  const data = await requestData(urls.getArtistSearch(req.query.q))
+
+  const { q: query, page = '1' } = req.query
+  const data = await requestData(urls.getArtistSearch(query, page))
 
   if (data) {
-    res.write(templates.artistsSearchResults(data, req.query.q))
+    res.write(templates.artistsSearchResults(data, query))
   }
 
   res.write(foot)

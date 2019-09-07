@@ -4,8 +4,10 @@
 
 const PREFIX = 'https://api.discogs.com'
 
-export function getArtistSearch(query) {
-  return `${PREFIX}/database/search?q=${encodeURIComponent(query)}&type=artist`
+export function getArtistSearch(query, page) {
+  return `${PREFIX}/database/search?q=${encodeURIComponent(
+    query
+  )}&type=artist&page=${page}`
 }
 
 export function getArtist(artistId) {
