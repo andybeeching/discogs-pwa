@@ -28,8 +28,11 @@ Front-End:
         ☐ Handle no results
     ☐ History API integration
     ☐ Offline notification
-    ☐ Handle 404
+    ☐ Handle 4xx
     ☐ Handle 5xx
+    ☐ Add lang and dir attribute
+    ☐ Add preload links
+    ☐ Review meta tags
 
 Back-end:
     ☐ Select host
@@ -38,9 +41,10 @@ Back-end:
     ✔ Implement basic shell (no API content) @done(19-09-06 13:30)
     ✔ Implement route-url matching @done(19-09-06 13:30)
     ✔ Implement streaming response pattern @done(19-09-04 19:22)
-    ☐ Implement ENV vars for secret key
+    ✔ Implement ENV vars for secret key @done(19-09-06 16:43)
     ✔ Implement node-fetch API client @done(19-09-06 13:30)
     ✔ Wire-up API calls @done(19-09-06 13:30)
     ✔ Implement some kind of caching @done(19-09-06 13:30)
+    ☐ Unit tests
     ☐ Consider using Typescript or Flow annotations
     ☐ Handle API call errors

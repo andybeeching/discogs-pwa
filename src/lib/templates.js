@@ -1,10 +1,75 @@
 export function artistsSearchResults(data, query) {
+  const resultRange = getResultRange(data.pagination)
+  const pagination = getPagination(data.pagination, query)
+
   return `
     ${query ? `<h2>Search results for "${query}"</h2>` : ''}
+    ${resultRange}
+    ${pagination}
     <ul class="grid">
       ${data.results.map(item => getGridItem(item, 'artist')).join('')}
     </ul>
+    ${pagination}
   `
+}
+
+// search results subline with ranges
+export function getResultRange(pagination) {
+  const { items, page, pages, per_page: perPage } = pagination
+  const startRange = (page - 1) * perPage + 1
+  const endRange = page === pages ? items : page * perPage
+
+  return `
+    <p>${pagination.items} results were found, viewing ${startRange} to ${endRange}</p>
+  `
+}
+
+// pagination links
+export function getPagination(pagination, query) {
+  const { page, pages } = pagination
+
+  return pages > 1
+    ? `
+    <ol class="pagination">
+      <li>
+        ${
+          page === 1
+            ? `<span class="disabled-link">&laquo;</span>`
+            : `<a href="/search?q=${encodeURIComponent(
+                query
+              )}&page=1">&laquo;</a>`
+        }
+      </li>
+      <li>
+        ${
+          page === 1
+            ? `<span class="disabled-link">Previous page</span>`
+            : `<a href="/search?q=${encodeURIComponent(
+                query
+              )}&page=${pagination.page - 1}">Previous page</a>`
+        }
+      </li>
+      <li>
+        ${
+          page === pages
+            ? `<span class="disabled-link">Next page</span>`
+            : `<a href="/search?q=${encodeURIComponent(
+                query
+              )}&page=${pagination.page + 1}">Next page</a>`
+        }
+      </li>
+      <li>
+        ${
+          page === pages
+            ? `<span class="disabled-link">&raquo;</span>`
+            : `<a href="/search?q=${encodeURIComponent(
+                query
+              )}&page=${pages}">&raquo;</a>`
+        }
+      </li>
+    </ol>
+  `
+    : ''
 }
 
 export function getGridItem(item, endpoint) {
