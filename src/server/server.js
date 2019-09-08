@@ -1,4 +1,4 @@
-import https from 'https'
+import spdy from 'spdy'
 import fs from 'fs'
 import path from 'path'
 import express from 'express'
@@ -14,7 +14,6 @@ import config from '../../webpack.config'
 import head from 'raw-loader!../partials/head.html'
 import nav from 'raw-loader!../partials/nav.html'
 import foot from 'raw-loader!../partials/foot.html'
-import { Http2SecureServer } from 'http2'
 
 const app = express()
 
@@ -33,6 +32,7 @@ app.use(
 
 app.use(webpackHotMiddleware(compiler))
 
+// home page
 app.get('/', async (req, res) => {
   res.write(head + nav)
   res.write('Home Page')
@@ -40,6 +40,7 @@ app.get('/', async (req, res) => {
   res.end()
 })
 
+// artist page
 app.get('/artist/:artistId', async (req, res) => {
   const { artistId } = req.params
   const { page = null } = req.query
@@ -61,6 +62,7 @@ app.get('/artist/:artistId', async (req, res) => {
   res.end()
 })
 
+// release page
 app.get('/release/:releaseId', async (req, res) => {
   res.write(head + nav)
   const data = await requestData(urls.getRelease(req.params.releaseId))
@@ -69,6 +71,7 @@ app.get('/release/:releaseId', async (req, res) => {
   res.end()
 })
 
+// search page
 app.get('/search', async (req, res) => {
   const { q: query, page = null } = req.query
 
@@ -91,18 +94,18 @@ app.get('/search', async (req, res) => {
 })
 
 // enable SSL
-const baseDir = path.resolve(__dirname, '../')
-const httpsServer = https.createServer(
+const baseDir = path.resolve(__dirname, process.env.SSL_PATH)
+const spdyServer = spdy.createServer(
   {
-    key: fs.readFileSync(`${baseDir}/server.key`),
-    cert: fs.readFileSync(`${baseDir}/server.cert`)
+    key: fs.readFileSync(`${baseDir}/${process.env.SSL_KEY}`),
+    cert: fs.readFileSync(`${baseDir}/${process.env.SSL_CERT}`)
   },
   app
 )
 
 // spin up server
 const PORT = process.env.PORT || 8080
-httpsServer.listen(PORT, () => {
+spdyServer.listen(PORT, () => {
   console.log(`App listening to ${PORT}....`)
   console.log('Press Ctrl+C to quit.')
 })

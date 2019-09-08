@@ -118,7 +118,7 @@ export function releaseList(data, artistId) {
     })
 
   const slug = `/artist/${artistId}?`
-  const pagination = getPagination(data.pagination, slug)
+  const pagination = releases.length ? getPagination(data.pagination, slug) : ''
 
   return `
     <h3>Releases</h2>
