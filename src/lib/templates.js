@@ -9,7 +9,9 @@ export function artistsSearchResults(data, query) {
     ${resultRange}
     ${pagination}
     <ul class="grid">
-      ${data.results.map(item => getGridItem(item, 'artist')).join('')}
+      ${data.results
+        .map(item => getGridItem(item, 'artist', 'page=1'))
+        .join('')}
     </ul>
     ${pagination}
   `
@@ -72,10 +74,10 @@ export function getPagination(pagination, slug) {
     : ''
 }
 
-export function getGridItem(item, endpoint) {
+export function getGridItem(item, slug, params) {
   return `
     <li class="grid-item">
-      <a href="/${endpoint}/${item.id}">
+      <a href="/${slug}/${item.id}${params ? `?${params}` : ''}">
         <img src="${item.thumb}" />
         <span class="desc">${item.title}</span>
       </a>
@@ -90,7 +92,7 @@ export function explodeArtists(artists) {
       const leadingChars = idx > 0 && isLast ? 'and ' : ''
       const trailingChars = !isLast && !leadingChars ? ', ' : ''
 
-      return `${leadingChars}<a href="/artist/${item.id}">${item.name}</a>${trailingChars}`
+      return `${leadingChars}<a href="/artist/${item.id}?page=1">${item.name}</a>${trailingChars}`
     })
     .join('')
 }
