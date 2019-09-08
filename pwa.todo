@@ -13,6 +13,7 @@ Stack:
     ☐ Add Husky hooks
     ✔ Add HMR @done(19-09-06 13:29)
     ☐ Figure out remote debugging for node, and front-end
+    ☐ Tidy up git commit history
 
 Front-End:
     ☐ Landing page
@@ -47,4 +48,4 @@ Back-end:
     ☐ Unit tests
     ☐ Consider using Typescript or Flow annotations
     ☐ Handle API call errors
-    ☐ Enable HTTPS on localhost
+    ✔ Enable HTTPS on localhost @done(19-09-08 13:21)

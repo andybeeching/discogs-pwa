@@ -40,13 +40,18 @@ app.get('/', async (req, res) => {
   res.end()
 })
 
-// TODO: redirect initial results to page 1
 app.get('/artist/:artistId', async (req, res) => {
   const { artistId } = req.params
+  const { page = null } = req.query
+
+  // cool URIs
+  if (!page) {
+    res.redirect(`/artist/${artistId}?page=1`)
+    return
+  }
 
   res.write(head + nav)
 
-  const { page = '1' } = req.query
   const artistData = await requestData(urls.getArtist(artistId))
   const releaseData = await requestData(urls.getArtistReleases(artistId, page))
 
@@ -64,11 +69,17 @@ app.get('/release/:releaseId', async (req, res) => {
   res.end()
 })
 
-// TODO: redirect initial results to page 1
 app.get('/search', async (req, res) => {
+  const { q: query, page = null } = req.query
+
+  // cool URIs
+  if (!page) {
+    res.redirect(`/search?q=${query}&page=1`)
+    return
+  }
+
   res.write(head + nav)
 
-  const { q: query, page = '1' } = req.query
   const data = await requestData(urls.getArtistSearch(query, page))
 
   if (data) {
