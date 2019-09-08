@@ -1,6 +1,8 @@
 export function artistsSearchResults(data, query) {
   const resultRange = getResultRange(data.pagination)
-  const pagination = getPagination(data.pagination, query)
+
+  const slug = `/search?q=${encodeURIComponent(query)}&`
+  const pagination = getPagination(data.pagination, slug)
 
   return `
     ${query ? `<h2>Search results for "${query}"</h2>` : ''}
@@ -25,7 +27,7 @@ export function getResultRange(pagination) {
 }
 
 // pagination links
-export function getPagination(pagination, query) {
+export function getPagination(pagination, slug) {
   const { page, pages } = pagination
 
   return pages > 1
@@ -35,36 +37,28 @@ export function getPagination(pagination, query) {
         ${
           page === 1
             ? `<span class="disabled-link">&laquo;</span>`
-            : `<a href="/search?q=${encodeURIComponent(
-                query
-              )}&page=1">&laquo;</a>`
+            : `<a href="${slug}page=1">&laquo;</a>`
         }
       </li>
       <li>
         ${
           page === 1
             ? `<span class="disabled-link">Previous page</span>`
-            : `<a href="/search?q=${encodeURIComponent(
-                query
-              )}&page=${pagination.page - 1}">Previous page</a>`
+            : `<a href="${slug}page=${pagination.page - 1}">Previous page</a>`
         }
       </li>
       <li>
         ${
           page === pages
             ? `<span class="disabled-link">Next page</span>`
-            : `<a href="/search?q=${encodeURIComponent(
-                query
-              )}&page=${pagination.page + 1}">Next page</a>`
+            : `<a href="${slug}page=${pagination.page + 1}">Next page</a>`
         }
       </li>
       <li>
         ${
           page === pages
             ? `<span class="disabled-link">&raquo;</span>`
-            : `<a href="/search?q=${encodeURIComponent(
-                query
-              )}&page=${pages}">&raquo;</a>`
+            : `<a href="${slug}page=${pages}">&raquo;</a>`
         }
       </li>
     </ol>
@@ -100,11 +94,10 @@ export function artist(data) {
     <h2>${data.name}</h2>
     <p>${data.profile}</p>
     ${data.members ? `<p>Members: ${explodeArtists(data.members)}</p>` : ''}
-    <h3>Releases</h2>
   `
 }
 
-export function releaseList(data) {
+export function releaseList(data, artistId) {
   // filter releases to major releases by artist (with or without collaborators)
   // sort by latest release
   const releases = data.releases
@@ -118,10 +111,16 @@ export function releaseList(data) {
       return b.year - a.year
     })
 
+  const slug = `/artist/${artistId}?`
+  const pagination = getPagination(data.pagination, slug)
+
   return `
+    <h3>Releases</h2>
+    ${pagination}
     <ul class="grid">
       ${releases.map(item => getGridItem(item, 'release')).join('')}
     </ul>
+    ${pagination}
   `
 }
 

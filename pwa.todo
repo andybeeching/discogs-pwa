@@ -20,12 +20,11 @@ Front-End:
     ☐ Artist page
         ☐ Tweak measure to ensure it's not too long
     ☐ Release page
-        ☐ Handle pagination
+        ✔ Handle pagination @done(19-09-08 12:24)
         ☐ Handle large album image - from mobile up
     ☐ Results page
         ☐ Handle no search results
-        ☐ Handle pagination
-        ☐ Handle no results
+        ✔ Handle pagination @done(19-09-08 12:24)
     ☐ History API integration
     ☐ Offline notification
     ☐ Handle 4xx

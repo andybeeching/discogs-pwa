@@ -17,7 +17,7 @@ const app = express()
 // statics
 app.use(express.static(__dirname))
 
-// Tell express to use the webpack-dev-middleware and use the webpack.config.js
+// tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
 const compiler = webpack(config)
 
@@ -36,16 +36,18 @@ app.get('/', async (req, res) => {
   res.end()
 })
 
+// TODO: redirect initial results to page 1
 app.get('/artist/:artistId', async (req, res) => {
   const { artistId } = req.params
 
   res.write(head + nav)
 
+  const { page = '1' } = req.query
   const artistData = await requestData(urls.getArtist(artistId))
-  const releaseData = await requestData(urls.getArtistReleases(artistId))
+  const releaseData = await requestData(urls.getArtistReleases(artistId, page))
 
   res.write(templates.artist(artistData))
-  res.write(templates.releaseList(releaseData))
+  res.write(templates.releaseList(releaseData, artistId))
   res.write(foot)
   res.end()
 })

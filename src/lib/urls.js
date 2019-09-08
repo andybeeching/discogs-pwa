@@ -14,8 +14,8 @@ export function getArtist(artistId) {
   return `${PREFIX}/artists/${artistId}`
 }
 
-export function getArtistReleases(artistId) {
-  return `${PREFIX}/artists/${artistId}/releases`
+export function getArtistReleases(artistId, page) {
+  return `${PREFIX}/artists/${artistId}/releases?page=${page}`
 }
 
 export function getRelease(releaseId) {
