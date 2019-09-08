@@ -14,6 +14,7 @@ Stack:
     ✔ Add HMR @done(19-09-06 13:29)
     ☐ Figure out remote debugging for node, and front-end
     ☐ Tidy up git commit history
+    ☐ Add .editconfig
 
 Front-End:
     ☐ Landing page
@@ -24,7 +25,7 @@ Front-End:
     ☐ Release page
         ☐ Handle large album image - from mobile up
     ☐ Results page
-        ☐ Handle no search results
+        ✔ Handle no search results @done(19-09-08 14:58)
         ✔ Handle pagination @done(19-09-08 12:24)
     ☐ History API integration
     ☐ Offline notification
