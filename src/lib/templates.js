@@ -22,7 +22,13 @@ export function getResultRange(pagination) {
   const endRange = page === pages ? items : page * perPage
 
   return `
-    <p>${pagination.items} results were found, viewing ${startRange} to ${endRange}</p>
+    ${
+      items > 0
+        ? `
+      <p>${pagination.items} results were found, viewing ${startRange} to ${endRange}</p>
+    `
+        : 'No search results found'
+    }
   `
 }
 
