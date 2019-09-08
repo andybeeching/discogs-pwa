@@ -19,8 +19,8 @@ Front-End:
         ✔ Implement partials @done(19-09-06 13:28)
     ☐ Artist page
         ☐ Tweak measure to ensure it's not too long
-    ☐ Release page
         ✔ Handle pagination @done(19-09-08 12:24)
+    ☐ Release page
         ☐ Handle large album image - from mobile up
     ☐ Results page
         ☐ Handle no search results
@@ -47,3 +47,4 @@ Back-end:
     ☐ Unit tests
     ☐ Consider using Typescript or Flow annotations
     ☐ Handle API call errors
+    ☐ Enable HTTPS on localhost

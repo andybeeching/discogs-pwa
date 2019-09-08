@@ -1,3 +1,6 @@
+import https from 'https'
+import fs from 'fs'
+import path from 'path'
 import express from 'express'
 import requestData from '../lib/apiClient.js'
 import * as templates from '../lib/templates.js'
@@ -11,6 +14,7 @@ import config from '../../webpack.config'
 import head from 'raw-loader!../partials/head.html'
 import nav from 'raw-loader!../partials/nav.html'
 import foot from 'raw-loader!../partials/foot.html'
+import { Http2SecureServer } from 'http2'
 
 const app = express()
 
@@ -75,9 +79,19 @@ app.get('/search', async (req, res) => {
   res.end()
 })
 
-const PORT = process.env.PORT || 8080
+// enable SSL
+const baseDir = path.resolve(__dirname, '../')
+const httpsServer = https.createServer(
+  {
+    key: fs.readFileSync(`${baseDir}/server.key`),
+    cert: fs.readFileSync(`${baseDir}/server.cert`)
+  },
+  app
+)
 
-app.listen(PORT, () => {
+// spin up server
+const PORT = process.env.PORT || 8080
+httpsServer.listen(PORT, () => {
   console.log(`App listening to ${PORT}....`)
   console.log('Press Ctrl+C to quit.')
 })
