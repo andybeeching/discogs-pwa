@@ -34,7 +34,8 @@
     "express": "^4.17.1",
     "lru-cache": "^5.1.1",
     "node-fetch": "^2.6.0",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "spdy": "^4.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
