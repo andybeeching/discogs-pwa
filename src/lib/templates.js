@@ -138,8 +138,8 @@ export function release(data) {
   return `
     <h2>${title}</h2>
     <p>By ${explodeArtists(artists)}</p>
-    <div class="artwork">
-      <img src="${images[0].resource_url}" class="artwork-img" />
+    <div>
+      <img src="${images[0].resource_url}" class="artwork" />
     </div>
     <h3>Tracklist</h3>
     <ol>
