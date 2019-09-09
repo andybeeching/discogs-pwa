@@ -8,9 +8,34 @@
   --color-light-grey: #f1f1f1;
   --color-green-accent: #4bc970;
   --color-darkgreen-accent: #2a4231;
-  --vertical-rhythm: 1em;
-  --max-measure-length: 600px;
+  --max-content-width: 1024px;
+  /*
+  "rivers of text"
+  */
+  --vertical-rhythm: 1rem;
+  /*
+  constrain text meausres to aid eye tracking
+  - equates to ~600px at 'normal' font-size (16px on <body>)
+  - scales if user adjusts the font-size
+  */
+  --max-measure-length: 38rem;
+  /*
+  constrain artwork images to size returned by discogs
+  also prevents them taking over the whole viewport!
+  */
   --max-image-width: 600px;
+  /*
+  minimum supported mobile device width, minus padding + grid gap
+  - equates to [2+*m] grids on all devices
+  - 320 - 2*(--spacing-medium) - (--spacing--large)
+  */
+  --min-grid-item-width: 144px;
+  /*
+  supply larger minimum column width to larger viewports
+  - equates to 1.5 * thumbnail imagwe size supplied by discogs
+  - factor should aid image resampling and rasterisation by browser
+  */
+  --desktop-min-grid-item-width: 225px;
 }
 
 *,
@@ -19,17 +44,13 @@
   box-sizing: inherit;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 html {
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   font-style: normal;
   font-weight: 300;
+  height: 100%;
 }
 
 body {
@@ -47,8 +68,43 @@ h3 {
   margin-top: 0;
 }
 
-a {
+.h1 {
+  font-size: 1.5rem;
+}
+
+.h2 {
+  font-size: 1.25rem;
+}
+
+.h3 {
+  font-size: 1.1rem;
+}
+
+@media (orientation: portrait) and (min-width: 768px),
+  (orientation: landscape) and (min-width: 1024px) {
+  .h1 {
+    font-size: 2rem;
+  }
+}
+
+a,
+.disabled-link {
+  background-color: var(--color-light-grey);
+  display: inline-block;
+  padding: 2px;
+  color: var(--color-black);
   text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:focus {
+  background-color: var(--color-darkgreen-accent);
+  color: var(--color-white);
+}
+
+.disabled-link {
+  opacity: 0.5;
 }
 
 p,
@@ -71,13 +127,27 @@ ul {
 
 .header {
   background-color: var(--color-black);
-  padding: var(--spacing-large) 0;
+  position: sticky;
+  top: 0;
+  padding: 0;
   flex-shrink: 0;
-  z-index: 2;
+  z-index: 3;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.24);
+}
+
+@media (orientation: portrait) and (min-width: 768px),
+  (orientation: landscape) and (min-width: 1024px) {
+  .header {
+    padding: var(--spacing-large) 0;
+  }
 }
 
 .header a {
   color: var(--color-white);
+}
+
+.header a:not(:hover) {
+  background-color: var(--color-black);
 }
 
 .nav {
@@ -156,32 +226,40 @@ ul {
   }
 }
 
-.main a,
-.disabled-link {
-  background-color: var(--color-light-grey);
-  color: var(--color-black);
-  display: inline-block;
-  padding: 2px;
-}
-
-.disabled-link {
-  opacity: 0.5;
-}
-
 .content {
-  max-width: 1000px;
+  max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: var(--spacing-large) var(--spacing-medium);
+  padding: var(--spacing-medium);
+}
+
+@media (orientation: portrait) and (min-width: 768px),
+  (orientation: landscape) and (min-width: 1024px) {
+  .content {
+    padding: var(--spacing-large) var(--spacing-medium);
+  }
 }
 
 .grid {
   display: grid;
   padding: 0;
   list-style: none;
-  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--min-grid-item-width), max-content)
+  );
   grid-column-gap: var(--spacing-large);
   grid-row-gap: var(--spacing-large);
   grid-auto-flow: dense;
+}
+
+@media (orientation: portrait) and (min-width: 768px),
+  (orientation: landscape) and (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(var(--desktop-min-grid-item-width), max-content)
+    );
+  }
 }
 
 .grid-item {
@@ -222,10 +300,10 @@ ul {
 
 .artwork {
   width: 100%;
-  max-height: 600px;
+  max-height: var(--max-image-width);
   object-fit: scale-down;
   object-position: 0 0;
-  margin-bottom: 1em;
+  margin-bottom: var(--vertical-rhythm);
 }
 
 .pagination {
@@ -248,9 +326,4 @@ ul {
 
 .disclaimer {
   font-size: 0.8rem;
-}
-
-.disclaimer a {
-  background-color: var(--color-light-grey);
-  color: var(--color-black);
 }
