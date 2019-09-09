@@ -37,20 +37,29 @@ body {
   min-height: 100vh;
 }
 
-a {
-  text-decoration: none;
-}
-
-p {
-  margin-top: 0;
-}
-
 h1,
 h2,
 h3 {
   font-weight: 300;
   color: var(--color-green-accent);
   margin-top: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+p,
+ol,
+ul {
+  margin-top: 0;
+  line-height: 1.5;
+}
+
+ol,
+ul {
+  list-style-position: inside;
+  padding-left: 0;
 }
 
 .header {
@@ -162,6 +171,7 @@ h3 {
   display: grid;
   padding: 0;
   margin: 0;
+  list-style: none;
   grid-template-columns: repeat(auto-fill, 200px);
   grid-column-gap: var(--spacing-large);
   grid-row-gap: var(--spacing-large);
@@ -202,6 +212,17 @@ h3 {
   padding: var(--spacing-medium);
   color: var(--color-light-grey);
   border-top: 1px solid var(--color-white);
+}
+
+.artwork {
+  margin-bottom: 1em;
+}
+
+.artwork-img {
+  width: 100%;
+  max-height: 600px;
+  object-fit: scale-down;
+  object-position: 0 0;
 }
 
 .pagination {
