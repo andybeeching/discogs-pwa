@@ -1,137 +1,14 @@
-:root {
-  --spacing-small: 4px;
-  --spacing-medium: 8px;
-  --spacing-large: 16px;
-  --spacing-xlarge: 24px;
-  --color-black: #333;
-  --color-white: #fff;
-  --color-light-grey: #f1f1f1;
-  --color-green-accent: #4bc970;
-  --color-darkgreen-accent: #2a4231;
-  --max-content-width: 1024px;
-  /*
-  "rivers of text"
-  */
-  --vertical-rhythm: 1rem;
-  /*
-  constrain text meausres to aid eye tracking
-  - equates to ~600px at 'normal' font-size (16px on <body>)
-  - scales if user adjusts the font-size
-  */
-  --max-measure-length: 38rem;
-  /*
-  constrain artwork images to size returned by discogs
-  also prevents them taking over the whole viewport!
-  */
-  --max-image-width: 600px;
-  /*
-  minimum supported mobile device width, minus padding + grid gap
-  - equates to [2+*m] grids on all devices
-  - 320 - 2*(--spacing-medium) - (--spacing--large)
-  */
-  --min-grid-item-width: 144px;
-  /*
-  supply larger minimum column width to larger viewports
-  - equates to 1.5 * thumbnail imagwe size supplied by discogs
-  - factor should aid image resampling and rasterisation by browser
-  */
-  --desktop-min-grid-item-width: 225px;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-html {
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  height: 100%;
-}
-
-body {
-  background-color: var(--color-white);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-h1,
-h2,
-h3 {
-  font-weight: 300;
-  color: var(--color-green-accent);
-  margin-top: 0;
-}
-
-.h1 {
-  font-size: 1.5rem;
-}
-
-.h2 {
-  font-size: 1.25rem;
-}
-
-.h3 {
-  font-size: 1.1rem;
-}
-
-@media (orientation: portrait) and (min-width: 768px),
-  (orientation: landscape) and (min-width: 1024px) {
-  .h1 {
-    font-size: 2rem;
-  }
-}
-
-a,
-.disabled-link {
-  background-color: var(--color-light-grey);
-  display: inline-block;
-  padding: 2px;
-  color: var(--color-black);
-  text-decoration: none;
-}
-
-a:hover,
-a:active,
-a:focus {
-  background-color: var(--color-darkgreen-accent);
-  color: var(--color-white);
-}
-
-.disabled-link {
-  opacity: 0.5;
-}
-
-p,
-ol,
-ul {
-  margin-top: 0;
-  line-height: 1.5;
-  margin-bottom: var(--vertical-rhythm);
-}
-
-p {
-  max-width: var(--max-measure-length);
-}
-
-ol,
-ul {
-  list-style-position: inside;
-  padding-left: 0;
-}
-
+/*
+ * 1. Allow content to size flex item
+ * 2. Always display header over other content
+ */
 .header {
   background-color: var(--color-black);
   position: sticky;
   top: 0;
   padding: 0;
-  flex-shrink: 0;
-  z-index: 3;
+  flex-shrink: 0; /* 1 */
+  z-index: 3; /* 2 */
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.24);
 }
 
@@ -150,10 +27,14 @@ ul {
   background-color: var(--color-black);
 }
 
+/*
+ * 1. Allow content to size flex item
+ * 2. Display navbar over Loader
+ */
 .nav {
   background-color: var(--color-light-grey);
-  flex-shrink: 0;
-  z-index: 2;
+  flex-shrink: 0; /* 1 */
+  z-index: 2; /* 2 */
 }
 
 .search-input {
@@ -175,55 +56,8 @@ ul {
 }
 
 .main {
-  position: relative;
   background-color: var(--color-white);
   flex-grow: 1;
-}
-
-.loader {
-  background: var(--color-white);
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  opacity: 0.75;
-  transition: opacity 500ms linear;
-  visibility: hidden;
-}
-
-.loader.is-loaded {
-  opacity: 0;
-}
-
-.loader.is-shown {
-  visibility: visible;
-}
-
-.loader.is-hidden:before {
-  animation-play-state: paused;
-}
-
-.loader:before {
-  content: ' ';
-  position: absolute;
-  display: block;
-  width: 75px;
-  height: 75px;
-  animation: spin 1s ease-in-out infinite;
-  border: 3px solid var(--color-green-accent);
-  border-radius: 50%;
-  border-top-color: var(--color-darkgreen-accent);
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .content {
@@ -239,17 +73,24 @@ ul {
   }
 }
 
+/*
+ * 1. Instruct grid to fill rows with as many columns will fit
+ *    depending on the min and max thesholds forcolumn width.
+ *
+ *    This way columns are flexible, but the grid will also try
+ *    and fit as many into a row as there is space.
+ */
 .grid {
   display: grid;
-  padding: 0;
-  list-style: none;
   grid-template-columns: repeat(
     auto-fill,
     minmax(var(--min-grid-item-width), max-content)
-  );
+  ); /* 1 */
   grid-column-gap: var(--spacing-large);
   grid-row-gap: var(--spacing-large);
-  grid-auto-flow: dense;
+  grid-auto-flow: dense; /* 1 */
+  padding: 0;
+  list-style: none;
 }
 
 @media (orientation: portrait) and (min-width: 768px),
@@ -273,6 +114,9 @@ ul {
   position: relative;
 }
 
+/*
+ * Fallback image if src is empty
+ */
 .grid-item img:before {
   content: ' ';
   display: block;
@@ -298,11 +142,15 @@ ul {
   border-top: 1px solid var(--color-white);
 }
 
+/*
+ * 1. Scale the image size down relative to the container
+ * 2. Position the image top-left in the container
+ */
 .artwork {
   width: 100%;
   max-height: var(--max-image-width);
-  object-fit: scale-down;
-  object-position: 0 0;
+  object-fit: scale-down; /* 1 */
+  object-position: 0 0; /* 2 */
   margin-bottom: var(--vertical-rhythm);
 }
 

@@ -1,0 +1,52 @@
+/*
+ * 1. Fix loader DIV over app so spinner is always in center of viewport
+ *    regardless of content length
+ */
+.loader {
+  background: var(--color-white);
+  position: fixed; /* 1 */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: 0.75;
+  transition: opacity 500ms linear;
+  visibility: hidden;
+}
+
+.loader.is-loaded {
+  opacity: 0;
+}
+
+.loader.is-shown {
+  visibility: visible;
+}
+
+/*
+ * 1. Ensure animation stops when loader is not active
+ */
+.loader.is-hidden:before {
+  animation-play-state: paused; /* 1 */
+}
+
+.loader:before {
+  content: ' ';
+  position: absolute;
+  display: block;
+  width: 75px;
+  height: 75px;
+  animation: spin 1s ease-in-out infinite;
+  border: 3px solid var(--color-green-accent);
+  border-radius: 50%;
+  border-top-color: var(--color-darkgreen-accent);
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

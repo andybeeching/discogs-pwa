@@ -1,0 +1,54 @@
+:root {
+  /*
+   *grid spacings
+   */
+  --spacing-small: 4px;
+  --spacing-medium: 8px;
+  --spacing-large: 16px;
+  --spacing-xlarge: 24px;
+  /*
+   *colour palette
+   */
+  --color-black: #333;
+  --color-white: #fff;
+  --color-light-grey: #f1f1f1;
+  --color-green-accent: #4bc970;
+  --color-darkgreen-accent: #2a4231;
+  /*
+   *constrain content in middle of screen
+   */
+  --max-content-width: 1024px;
+  /*
+   * "rivers of text"
+   */
+  --vertical-rhythm: 1rem;
+  /*
+   * constrain text measure to aid eye tracking
+   * - equates to ~600px at 'normal' font-size (16px on <body>)
+   * - scales if user adjusts the font-size
+   */
+  --max-measure-length: 38rem;
+  /*
+   * constrain artwork images to size returned by discogs
+   * also prevents them taking over the whole viewport!
+   */
+  --max-image-width: 600px;
+  /*
+   * minimum supported mobile device width, minus padding + grid gap
+   * - equates to [2+*m] grids on all devices
+   * - 320 - 2*(--spacing-medium) - (--spacing--large)
+   */
+  --min-grid-item-width: 144px;
+  /*
+   * supply larger minimum column width to larger viewports
+   * - equates to 1.5 * thumbnail imagwe size supplied by discogs
+   * - factor should aid image resampling and rasterisation by browser
+   */
+  --desktop-min-grid-item-width: 225px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
