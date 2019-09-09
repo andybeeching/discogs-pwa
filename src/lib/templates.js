@@ -99,7 +99,7 @@ export function explodeArtists(artists) {
 
 export function artist(data) {
   return `
-    <h2>${data.name}</h2>
+    <h2 class="h2">${data.name}</h2>
     <p>${data.profile}</p>
     ${data.members ? `<p>Members: ${explodeArtists(data.members)}</p>` : ''}
   `
@@ -123,7 +123,7 @@ export function releaseList(data, artistId) {
   const pagination = releases.length ? getPagination(data.pagination, slug) : ''
 
   return `
-    <h3>Releases</h2>
+    <h3 class="h3">Releases</h2>
     ${pagination}
     <ul class="grid">
       ${releases.map(item => getGridItem(item, 'release')).join('')}
@@ -136,7 +136,7 @@ export function release(data) {
   const { artists, tracklist, title, images } = data
 
   return `
-    <h2>${title}</h2>
+    <h2 class="h2">${title}</h2>
     <p>By ${explodeArtists(artists)}</p>
     <div>
       <img src="${images[0].resource_url}" class="artwork" />
