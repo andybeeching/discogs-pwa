@@ -1,5 +1,8 @@
 import 'normalize.css'
 import * as constants from './lib/constants'
+import './css/base.css'
+import './css/typography.css'
+import './css/loader.css'
 import './css/style.css'
 
 console.log('HMR still works')
