@@ -11,15 +11,16 @@
       name="Description"
       content="A progressive web app for exploring Discogs vinyl."
     />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
     <script src="/main.js"></script>
   </head>
   <body>
     <div class="loader is-hidden"></div>
     <script type="text/javascript">
+      // App is available as main javascript bundle blocks (deliberately)
+      // the HTML parser (for a couple of milliseconds)
       App.showLoader()
     </script>
     <header class="header">
       <h1 class="content h1"><a href="/">Discogs Explorer</a></h1>
     </header>
-  </body>
-</html>

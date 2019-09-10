@@ -11,8 +11,6 @@ module.exports = {
     filename: '[name].js'
   },
   target: 'node',
-  mode: 'development',
-  // watch: true,
   node: {
     // Need this when working with express, otherwise the build fails
     __dirname: false, // if you don't put this is, __dirname
@@ -31,15 +29,6 @@ module.exports = {
           emitWarning: true,
           failOnError: false,
           failOnWarning: false
-        }
-      },
-      {
-        // Transpiles ES6-8 into ES5
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          configFile: './.babelrc'
         }
       }
     ]

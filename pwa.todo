@@ -2,11 +2,11 @@ PWA Project:
     A simple project to take PWA concepts for a spin, by building a vinyl record lookup service, backed by Discogs.
 
 Stack:
-    ☐ Select CSS(-in-JS) framework
+    ✔ Select CSS(-in-JS) framework @done(19-09-10 08:55)
     ✔ Select JS/templating framework @done(19-09-06 13:30)
     ✔ Add Babel for transpilation @done(19-09-04 15:40)
     ☐ Bundle with webpack
-        ☐ Impl separate dev + prod builds
+        ✔ Impl separate dev + prod builds @done(19-09-10 08:55)
         ✔ Add middlewear hot relaoding @done(19-09-06 13:30)
         ☐ Improve current watch setup (spawn subprocesses?)
     ✔ Add test harness @done(19-09-04 15:40)
@@ -15,6 +15,9 @@ Stack:
     ☐ Figure out remote debugging for node, and front-end
     ☐ Tidy up git commit history
     ✔ Add .editconfig @done(19-09-08 15:04)
+    ☐ Add stylelint
+    ☐ Add autoprefixer
+    ☐ Enable HRM with MiniCssExtractPlugin
 
 Front-End:
     ☐ Landing page
@@ -27,6 +30,8 @@ Front-End:
     ✔ Results page @done(19-09-09 14:04)
         ✔ Handle no search results @done(19-09-08 14:58)
         ✔ Handle pagination @done(19-09-08 12:24)
+        ☐ Handle layout shift with image loading (+ loader dismissal)
+        ☐ Consider increasing results size to 100 for streaming experiments
     ✔ Add 'loading' state @done(19-09-09 14:04)
     ☐ Add mapping for URL slugs
     ☐ History API integration
@@ -53,3 +58,5 @@ Back-end:
     ☐ Handle API call errors
     ✔ Enable HTTPS on localhost @done(19-09-08 13:21)
     ✔ Enable HTTP2 on localhost @done(19-09-08 18:03)
+    ☐ Implement Brotli for compression
+    ☐ Add robots.txt

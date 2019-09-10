@@ -2,39 +2,54 @@ import spdy from 'spdy'
 import fs from 'fs'
 import path from 'path'
 import express from 'express'
+import stats from '../../dist/stats.json'
+
 import requestData from '../lib/apiClient.js'
 import * as templates from '../lib/templates.js'
 import * as urls from '../lib/urls.js'
-
-import webpack from 'webpack'
-import webpackDevMiddleware from 'webpack-dev-middleware'
-import webpackHotMiddleware from 'webpack-hot-middleware'
-import config from '../../webpack.config'
-
 import head from 'raw-loader!../partials/head.html'
 import nav from 'raw-loader!../partials/nav.html'
 import foot from 'raw-loader!../partials/foot.html'
+
+// development tools
+import webpack from 'webpack'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+import config from '../../webpack.dev.config'
 
 const app = express()
 
 // statics
 app.use(express.static(__dirname))
 
-// tell express to use the webpack-dev-middleware and use the webpack.config.js
-// configuration file as a base.
-const compiler = webpack(config)
+// configure server for DEV vs PRODUCTION
+let header = head
+if (app.get('env') === 'development') {
+  // remove CSS link from head as (ftm) injected via dynamic style tags
+  // header = head.replace('main.css', '')
 
-app.use(
-  webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
-  })
-)
+  // tell express to use the webpack-dev-middleware and use the webpack.config.js
+  // configuration file as a base.
+  const compiler = webpack(config)
 
-app.use(webpackHotMiddleware(compiler))
+  // enable HMR
+  app.use(
+    webpackDevMiddleware(compiler, {
+      publicPath: config.output.publicPath
+    })
+  )
+
+  app.use(webpackHotMiddleware(compiler))
+} else {
+  // asset URL rewriting
+  // - replace hydrated CSS and JS with latest build
+  const { main } = stats.assetsByChunkName
+  header = head.replace('main.css', main[0]).replace('main.js', main[1])
+}
 
 // home page
 app.get('/', async (req, res) => {
-  res.write(head + nav)
+  res.write(header + nav)
   res.write('Home Page')
   res.write(foot)
   res.end()
@@ -51,7 +66,7 @@ app.get('/artist/:artistId', async (req, res) => {
     return
   }
 
-  res.write(head + nav)
+  res.write(header + nav)
 
   const artistData = await requestData(urls.getArtist(artistId))
   const releaseData = await requestData(urls.getArtistReleases(artistId, page))
@@ -94,11 +109,11 @@ app.get('/search', async (req, res) => {
 })
 
 // enable SSL
-const baseDir = path.resolve(__dirname, process.env.SSL_PATH)
+const sslDir = path.resolve(__dirname, process.env.SSL_PATH)
 const spdyServer = spdy.createServer(
   {
-    key: fs.readFileSync(`${baseDir}/${process.env.SSL_KEY}`),
-    cert: fs.readFileSync(`${baseDir}/${process.env.SSL_CERT}`)
+    key: fs.readFileSync(`${sslDir}/${process.env.SSL_KEY}`),
+    cert: fs.readFileSync(`${sslDir}/${process.env.SSL_CERT}`)
   },
   app
 )

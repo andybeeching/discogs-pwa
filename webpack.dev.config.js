@@ -62,8 +62,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['!./dist/server.js'],
-      cleanOnceAfterBuildPatterns: ['!./dist/server.js']
+      cleanOnceBeforeBuildPatterns: ['!./dist/server.js']
     })
   ]
 }
