@@ -17,7 +17,8 @@ Stack:
     ✔ Add .editconfig @done(19-09-08 15:04)
     ☐ Add stylelint
     ☐ Add autoprefixer
-    ☐ Enable HRM with MiniCssExtractPlugin
+    ✘ Enable HRM with MiniCssExtractPlugin @cancelled(19-09-10 11:22)
+    ☐ Consider adding CI (for fun)
 
 Front-End:
     ☐ Landing page
@@ -25,6 +26,7 @@ Front-End:
     ✔ Artist page @done(19-09-09 14:04)
         ✔ Tweak measure to ensure it's not too long @done(19-09-09 14:04)
         ✔ Handle pagination @done(19-09-08 12:24)
+        ☐ Handle Oxford comma in Members list
     ✔ Release page @done(19-09-09 14:04)
         ✔ Handle large album image - from mobile up @done(19-09-09 14:04)
     ✔ Results page @done(19-09-09 14:04)
@@ -41,6 +43,7 @@ Front-End:
     ✔ Add lang and dir attribute @done(19-09-08 12:26)
     ☐ Add preload links
     ☐ Review meta tags
+    ☐ Consider adding nprogress bar
 
 Back-end:
     ☐ Select host
@@ -53,10 +56,13 @@ Back-end:
     ✔ Implement node-fetch API client @done(19-09-06 13:30)
     ✔ Wire-up API calls @done(19-09-06 13:30)
     ✔ Implement some kind of caching @done(19-09-06 13:30)
-    ☐ Unit tests
+    ☐ Unit tests @started(19-09-10 11:22)
     ☐ Consider using Typescript or Flow annotations
     ☐ Handle API call errors
     ✔ Enable HTTPS on localhost @done(19-09-08 13:21)
     ✔ Enable HTTP2 on localhost @done(19-09-08 18:03)
     ☐ Implement Brotli for compression
     ☐ Add robots.txt
+    ☐ Double-check Artist pages have parallelised API calls
+    ☐ Handle out of bound pagination calls
+    ☐ Rename artist => artistSummary template

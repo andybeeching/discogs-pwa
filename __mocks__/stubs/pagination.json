@@ -1,0 +1,39 @@
+{
+  "pagination-empty": {
+    "per_page": 50,
+    "items": 1,
+    "page": 1,
+    "urls": {},
+    "pages": 1
+  },
+  "pagination-first": {
+    "per_page": 50,
+    "pages": 20,
+    "page": 1,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=beatles&per_page=50&type=artist&page=20",
+      "next": "https://api.discogs.com/database/search?q=beatles&per_page=50&type=artist&page=2"
+    },
+    "items": 943
+  },
+  "pagination-middle": {
+    "per_page": 50,
+    "pages": 20,
+    "page": 10,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=beatles&per_page=50&type=artist&page=20",
+      "next": "https://api.discogs.com/database/search?q=beatles&per_page=50&type=artist&page=2"
+    },
+    "items": 943
+  },
+  "pagination-last": {
+    "per_page": 50,
+    "pages": 20,
+    "page": 20,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?q=beatles&per_page=50&type=artist&page=20",
+      "next": "https://api.discogs.com/database/search?q=beatles&per_page=50&type=artist&page=2"
+    },
+    "items": 943
+  }
+}
