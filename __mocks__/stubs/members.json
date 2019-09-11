@@ -1,0 +1,44 @@
+{
+  "one": [
+    {
+      "active": true,
+      "resource_url": "https://api.discogs.com/artists/82343",
+      "id": 82343,
+      "name": "Erlend \u00d8ye"
+    }
+  ],
+  "two": [
+    {
+      "active": true,
+      "resource_url": "https://api.discogs.com/artists/82343",
+      "id": 82343,
+      "name": "Erlend \u00d8ye"
+    },
+    {
+      "active": true,
+      "resource_url": "https://api.discogs.com/artists/462316",
+      "id": 462316,
+      "name": "Eirik Glambek B\u00f8e"
+    }
+  ],
+  "multiple": [
+    {
+      "active": true,
+      "resource_url": "https://api.discogs.com/artists/82343",
+      "id": 82343,
+      "name": "Erlend \u00d8ye"
+    },
+    {
+      "active": true,
+      "resource_url": "https://api.discogs.com/artists/462316",
+      "id": 462316,
+      "name": "Eirik Glambek B\u00f8e"
+    },
+    {
+      "active": true,
+      "resource_url": "https://api.discogs.com/artists/123456",
+      "id": 123456,
+      "name": "Feist"
+    }
+  ]
+}

@@ -1,10 +1,22 @@
+import rbl from 'remove-blank-lines'
+
+// removes superflous line breaks and leading/trailing whitespace
+const trim = str => rbl(str).trim()
+
+/**
+ * Render the Search Results page content
+ *
+ * @param {Object} data - Discogs Search Result data entity
+ * @param {String} query - Search terms (unencoded)
+ * @returns {String}
+ */
 export function artistsSearchResults(data, query) {
   const resultRange = getResultRange(data.pagination)
 
   const slug = `/search?q=${encodeURIComponent(query)}&`
   const pagination = getPagination(data.pagination, slug)
 
-  return `
+  return trim(`
     ${query ? `<h2>Search results for "${query}"</h2>` : ''}
     ${resultRange}
     ${pagination}
@@ -14,10 +26,16 @@ export function artistsSearchResults(data, query) {
         .join('')}
     </ul>
     ${pagination}
-  `
+  `)
 }
 
-// search results subline with ranges
+/**
+ * Render the number of search results with range
+ *
+ * @param {Object} pagination - Discogs Pagination data entity
+ * @docs https://www.discogs.com/developers#page:home,header:home-pagination
+ * @returns {String}
+ */
 export function getResultRange(pagination) {
   const { items, page, pages, per_page: perPage } = pagination
   const startRange = (page - 1) * perPage + 1
@@ -34,7 +52,14 @@ export function getResultRange(pagination) {
   `
 }
 
-// pagination links
+/**
+ *
+ * @param {Object} pagination - Discogs Pagination data entity
+ * @docs https://www.discogs.com/developers#page:database,header:database-search-get
+ * @param {String} slug - URL encoded PWA endpoint for related requests
+ * @example 'search?q=The%20Beatles'
+ * @returns {String}
+ */
 export function getPagination(pagination, slug) {
   const { page, pages } = pagination
 
@@ -74,7 +99,18 @@ export function getPagination(pagination, slug) {
     : ''
 }
 
-export function getGridItem(item, slug, params) {
+/**
+ * Renders Grid item
+ *
+ * @param {Object} item - Discogs Artist or Release data entity
+ * @param {String} slug - URL encoded PWA endpoint for related requests
+ * @example 'artist'
+ * @param {String} params - additional parameters to append to releated URLs
+ * @optional
+ * @example 'page=1'
+ * @returns {String}
+ */
+function getGridItem(item, slug, params) {
   return `
     <li class="grid-item">
       <a href="/${slug}/${item.id}${params ? `?${params}` : ''}">
@@ -85,6 +121,13 @@ export function getGridItem(item, slug, params) {
   `
 }
 
+/**
+ * Renders a list of artists as a readable list
+ *
+ * @param {Array} artists - array of 'members' from Artist data entity
+ * @example [{ name: {String}, id: {Number}}, ...]
+ * @returns {String}
+ */
 export function explodeArtists(artists) {
   return artists
     .map((item, idx, arr) => {
@@ -97,6 +140,12 @@ export function explodeArtists(artists) {
     .join('')
 }
 
+/**
+ * Renders an artist summary
+ *
+ * @param {{Object}} data - Discogs Artist data entity
+ * @returns {String}
+ */
 export function artist(data) {
   return `
     <h2 class="h2">${data.name}</h2>
@@ -105,9 +154,16 @@ export function artist(data) {
   `
 }
 
+/**
+ * Renders artist releases in descending (by release date) order.
+ * NOTE: Appearences on compilations are generally omitted to reduce 'noise'
+ *
+ * @param {Object} data - Discogs Artist Releases data entity
+ * @param {Number} artistId - artist id
+ * @returns {String}
+ */
 export function releaseList(data, artistId) {
-  // filter releases to major releases by artist (with or without collaborators)
-  // sort by latest release
+  // filter releases to major releases, and sort by latest release
   const releases = data.releases
     .filter(
       item =>
@@ -120,22 +176,28 @@ export function releaseList(data, artistId) {
     })
 
   const slug = `/artist/${artistId}?`
-  const pagination = releases.length ? getPagination(data.pagination, slug) : ''
+  const pagination = getPagination(data.pagination, slug)
 
-  return `
+  return trim(`
     <h3 class="h3">Releases</h2>
     ${pagination}
     <ul class="grid">
       ${releases.map(item => getGridItem(item, 'release')).join('')}
     </ul>
     ${pagination}
-  `
+  `)
 }
 
+/**
+ * Renders the release page
+ *
+ * @param {Object} data - Discogs Release data entity
+ * @returns {String}
+ */
 export function release(data) {
   const { artists, tracklist, title, images } = data
 
-  return `
+  return trim(`
     <h2 class="h2">${title}</h2>
     <p>By ${explodeArtists(artists)}</p>
     <div>
@@ -145,5 +207,5 @@ export function release(data) {
     <ol>
         ${tracklist.map(item => `<li>${item.title}</a>`).join('')}
     </ol>
-  `
+  `)
 }
