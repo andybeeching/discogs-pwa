@@ -9,7 +9,7 @@ if (module.hot) {
   module.hot.accept() // eslint-disable-line no-undef
 }
 
-window.App = (function() {
+const createApp = () => {
   let loaderTimerId
 
   // delay showing loader in case content is rendered quickly
@@ -19,11 +19,10 @@ window.App = (function() {
       const loader = document.querySelector(constants.LOADER_SELECTOR)
 
       loader.classList.replace(constants.LOADER_HIDDEN, constants.LOADER_SHOWN)
-    }, 200)
+    }, constants.LOADER_DELAY)
   }
 
-  // must be 'load' as 'DOMContentLoaded' fires too soon
-  window.addEventListener('load', evt => {
+  const hideLoader = () => {
     window.App.isAppLoaded = true
     clearTimeout(loaderTimerId)
 
@@ -38,10 +37,17 @@ window.App = (function() {
       )
     }
     loader.classList.add(constants.LOADER_LOADED)
-  })
+  }
+
+  // must be 'load' as 'DOMContentLoaded' fires too soon
+  window.addEventListener('load', hideLoader)
 
   return {
     showLoader,
+    hideLoader,
     isAppLoaded: false
   }
-})()
+}
+
+window.App = createApp()
+export default createApp
