@@ -17,6 +17,7 @@ Stack:
     ✔ Add .editconfig @done(19-09-08 15:04)
     ☐ Add stylelint
     ☐ Add autoprefixer
+    ☐ Add eslint-plugin-jsdoc
     ✘ Enable HRM with MiniCssExtractPlugin @cancelled(19-09-10 11:22)
     ☐ Consider adding CI (for fun)
 
@@ -36,7 +37,6 @@ Front-End:
         ☐ Consider increasing results size to 100 for streaming experiments
     ✔ Add 'loading' state @done(19-09-09 14:04)
     ☐ Add mapping for URL slugs
-    ☐ History API integration
     ☐ Offline notification
     ☐ Handle 4xx
     ☐ Handle 5xx
@@ -57,12 +57,29 @@ Back-end:
     ✔ Wire-up API calls @done(19-09-06 13:30)
     ✔ Implement some kind of caching @done(19-09-06 13:30)
     ☐ Unit tests @started(19-09-10 11:22)
-    ☐ Consider using Typescript or Flow annotations
     ☐ Handle API call errors
     ✔ Enable HTTPS on localhost @done(19-09-08 13:21)
     ✔ Enable HTTP2 on localhost @done(19-09-08 18:03)
     ☐ Implement Brotli for compression
     ☐ Add robots.txt
+    ☐ Helmet JS for header-based security
+
+Improvements:
+    ☐ Consider using Typescript or Flow annotations
+    ☐ Use Marko to provide 'real' HTML stream rendering
+    ☐ History API integration
+    ☐ Get html-loader to work with static HTML (if not Marko)
+    ☐ Rename pwa.todo => .todo
+    ☐ Combine Jest config files (prefer jest.config.js)
+    ☐ Add will-transform to loader
     ☐ Double-check Artist pages have parallelised API calls
     ☐ Handle out of bound pagination calls
     ☐ Rename artist => artistSummary template
+    ☐ Rename server => app?
+    ☐ server.test.js - make top-level generic nock routes
+
+Features:
+    ☐ Enable album searching
+    ☐ Implement user mgt via Oauth
+    ☐ Expose more data in UI (e.g. track times, ratings)
+    ☐ Bring in 3rd party data (e.g. Amazon/Spotify ratings)

@@ -39,16 +39,6 @@ module.exports = {
         }
       },
       {
-        // Loads the javacript into html template provided.
-        // Entry point is set below in HtmlWebPackPlugin in Plugins
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader'
-          }
-        ]
-      },
-      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },

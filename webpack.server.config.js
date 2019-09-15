@@ -30,6 +30,10 @@ module.exports = {
           failOnError: false,
           failOnWarning: false
         }
+      },
+      {
+        test: /\.html$/i,
+        use: 'raw-loader'
       }
     ]
   }
