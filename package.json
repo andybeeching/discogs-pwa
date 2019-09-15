@@ -15,12 +15,6 @@
     "test:watch": "jest --watch",
     "test:watchAll": "jest --watchAll"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
-      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andybeeching/pwa.git"
@@ -40,7 +34,8 @@
     "node-fetch": "^2.6.0",
     "normalize.css": "^8.0.1",
     "remove-blank-lines": "^1.1.1",
-    "spdy": "^4.0.1"
+    "spdy": "^4.0.1",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -69,6 +64,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
+    "jest-raw-loader": "^1.0.1",
     "mini-css-extract-plugin": "^0.8.0",
     "nock": "^11.3.3",
     "nodemon": "^1.19.2",

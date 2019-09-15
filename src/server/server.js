@@ -1,6 +1,5 @@
 import spdy from 'spdy'
 import fs from 'fs'
-import path from 'path'
 import express from 'express'
 import stats from '../../dist/stats.json'
 
@@ -49,7 +48,7 @@ if (app.get('env') === 'development') {
 
 // home page
 app.get('/', async (req, res) => {
-  res.write(header + nav)
+  res.type('.html').write(header + nav)
   res.write('Home Page')
   res.write(foot)
   res.end()
@@ -66,7 +65,7 @@ app.get('/artist/:artistId', async (req, res) => {
     return
   }
 
-  res.write(header + nav)
+  res.type('.html').write(header + nav)
 
   const artistData = await requestData(urls.getArtist(artistId))
   const releaseData = await requestData(urls.getArtistReleases(artistId, page))
@@ -79,7 +78,8 @@ app.get('/artist/:artistId', async (req, res) => {
 
 // release page
 app.get('/release/:releaseId', async (req, res) => {
-  res.write(head + nav)
+  res.type('.html').write(header + nav)
+
   const data = await requestData(urls.getRelease(req.params.releaseId))
   res.write(templates.release(data))
   res.write(foot)
@@ -96,10 +96,9 @@ app.get('/search', async (req, res) => {
     return
   }
 
-  res.write(head + nav)
+  res.type('.html').write(header + nav)
 
   const data = await requestData(urls.getArtistSearch(query, page))
-
   if (data) {
     res.write(templates.artistsSearchResults(data, query))
   }
@@ -109,7 +108,7 @@ app.get('/search', async (req, res) => {
 })
 
 // enable SSL
-const sslDir = path.resolve(__dirname, process.env.SSL_PATH)
+const sslDir = process.cwd()
 const spdyServer = spdy.createServer(
   {
     key: fs.readFileSync(`${sslDir}/${process.env.SSL_KEY}`),
@@ -124,3 +123,5 @@ spdyServer.listen(PORT, () => {
   console.log(`App listening to ${PORT}....`)
   console.log('Press Ctrl+C to quit.')
 })
+
+export default app
