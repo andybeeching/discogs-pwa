@@ -55,7 +55,7 @@ app.get('/', async (req, res) => {
 })
 
 // artist page
-app.get('/artist/:artistId', async (req, res) => {
+app.get('/artist/:artistId', async (req, res, next) => {
   const { artistId } = req.params
   const { page = null } = req.query
 
@@ -65,13 +65,22 @@ app.get('/artist/:artistId', async (req, res) => {
     return
   }
 
-  res.type('.html').write(header + nav)
-
   const artistData = await requestData(urls.getArtist(artistId))
   const releaseData = await requestData(urls.getArtistReleases(artistId, page))
 
-  res.write(templates.artist(artistData))
-  res.write(templates.releaseList(releaseData, artistId))
+  res.type('.html').write(header + nav)
+
+  // return "unknown artist error" if negative Discogs lookup
+  if (
+    Object.keys(artistData).length === 1 ||
+    Object.keys(releaseData).length === 1
+  ) {
+    res.write("Oh noes, this artist doesn't exist :-(")
+  } else {
+    res.write(templates.artist(artistData))
+    res.write(templates.releaseList(releaseData, artistId))
+  }
+
   res.write(foot)
   res.end()
 })
@@ -81,7 +90,14 @@ app.get('/release/:releaseId', async (req, res) => {
   res.type('.html').write(header + nav)
 
   const data = await requestData(urls.getRelease(req.params.releaseId))
-  res.write(templates.release(data))
+
+  // return "unknown release error" if negative Discogs lookup
+  if (Object.keys(data).length === 1) {
+    res.write("Oh noes, this release doesn't exist :-(")
+  } else {
+    res.write(templates.release(data))
+  }
+
   res.write(foot)
   res.end()
 })
@@ -103,6 +119,17 @@ app.get('/search', async (req, res) => {
     res.write(templates.artistsSearchResults(data, query))
   }
 
+  res.write(foot)
+  res.end()
+})
+
+// 404
+app.use((req, res) => {
+  res
+    .status(404)
+    .type('.html')
+    .write(header + nav)
+  res.write("Oh noes, the page you're looking for doesn't exist!")
   res.write(foot)
   res.end()
 })

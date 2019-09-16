@@ -84,3 +84,5 @@ Features:
     ☐ Implement user mgt via Oauth
     ☐ Expose more data in UI (e.g. track times, ratings)
     ☐ Bring in 3rd party data (e.g. Amazon/Spotify ratings)
+    ☐ Add Analytics to track page views/times etc...
+    ☐ RUM solution?
