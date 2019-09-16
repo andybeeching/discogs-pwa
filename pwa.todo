@@ -10,7 +10,7 @@ Stack:
         ✔ Add middlewear hot relaoding @done(19-09-06 13:30)
         ☐ Improve current watch setup (spawn subprocesses?)
     ✔ Add test harness @done(19-09-04 15:40)
-    ☐ Add Husky hooks
+    ✔ Add Husky hooks @done(19-09-16 17:03)
     ✔ Add HMR @done(19-09-06 13:29)
     ☐ Figure out remote debugging for node, and front-end
     ☐ Tidy up git commit history
@@ -21,6 +21,8 @@ Stack:
     ✘ Enable HRM with MiniCssExtractPlugin @cancelled(19-09-10 11:22)
     ☐ Consider adding CI (for fun)
     ☐ Write README
+    ☐ Consider using Phantom JS for DOM tests
+    ☐ Add Axe/pa11y-ci for a11y testing
 
 Front-End:
     ☐ Landing page
@@ -45,6 +47,7 @@ Front-End:
     ☐ Add preload links
     ☐ Review meta tags
     ☐ Consider adding nprogress bar
+    ☐ ARIA
 
 Back-end:
     ☐ Select host
