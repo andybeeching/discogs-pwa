@@ -70,8 +70,12 @@ app.get('/artist/:artistId', async (req, res, next) => {
 
   res.type('.html').write(header + nav)
 
+  // return "Discogs down error"
+  if (artistData === null || releaseData === null) {
+    res.write('Oh noes, it looks like Discogs is down :-(')
+  }
   // return "unknown artist error" if negative Discogs lookup
-  if (
+  else if (
     Object.keys(artistData).length === 1 ||
     Object.keys(releaseData).length === 1
   ) {
@@ -91,8 +95,12 @@ app.get('/release/:releaseId', async (req, res) => {
 
   const data = await requestData(urls.getRelease(req.params.releaseId))
 
+  // return "Discogs down error"
+  if (data === null) {
+    res.write('Oh noes, it looks like Discogs is down :-(')
+  }
   // return "unknown release error" if negative Discogs lookup
-  if (Object.keys(data).length === 1) {
+  else if (Object.keys(data).length === 1) {
     res.write("Oh noes, this release doesn't exist :-(")
   } else {
     res.write(templates.release(data))
@@ -115,7 +123,11 @@ app.get('/search', async (req, res) => {
   res.type('.html').write(header + nav)
 
   const data = await requestData(urls.getArtistSearch(query, page))
-  if (data) {
+
+  // return "Discogs down error"
+  if (data === null) {
+    res.write('Oh noes, it looks like Discogs is down :-(')
+  } else {
     res.write(templates.artistsSearchResults(data, query))
   }
 
@@ -130,6 +142,18 @@ app.use((req, res) => {
     .type('.html')
     .write(header + nav)
   res.write("Oh noes, the page you're looking for doesn't exist!")
+  res.write(foot)
+  res.end()
+})
+
+// 5xx
+app.use(function(err, req, res) {
+  res
+    .status(500)
+    .type('.html')
+    .write(header + nav)
+
+  res.write('Server hiccup: ' + JSON.stringify({ error: err }))
   res.write(foot)
   res.end()
 })

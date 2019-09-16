@@ -75,6 +75,21 @@ describe('server.js', () => {
         .expect(302)
     })
 
+    it('responds with "Discogs down" page for API 500 error', async () => {
+      // mock Discogs API
+      nock(API)
+        .get(/artists/)
+        .reply(500)
+        .get(/releases/)
+        .reply(500)
+
+      await request(server)
+        .get('/artist/1?page=1')
+        .set('Accept', 'text/html')
+        .expect('Content-Type', /html/)
+        .expect(200)
+    })
+
     it('responds with "unknown artist" page for unknown IDs', async () => {
       // mock Discogs API
       nock(API)
@@ -107,6 +122,19 @@ describe('server.js', () => {
   })
 
   describe('GET /release', () => {
+    it('responds with "Discogs down" page for API 500 error', async () => {
+      // mock Discogs API
+      nock(API)
+        .get(/masters/)
+        .reply(500)
+
+      await request(server)
+        .get('/release/1')
+        .set('Accept', 'text/html')
+        .expect('Content-Type', /html/)
+        .expect(200)
+    })
+
     it('responds with "unknown release" page for unknown IDs', async () => {
       // mock Discogs API
       nock(API)
@@ -119,6 +147,7 @@ describe('server.js', () => {
         .expect('Content-Type', /html/)
         .expect(200)
     })
+
     it('responds with release page', async () => {
       // mock Discogs API
       nock(API)
@@ -138,6 +167,19 @@ describe('server.js', () => {
       await request(server)
         .get('/search?q=Beatles')
         .expect(302)
+    })
+
+    it('responds with "Discogs down" page for API 500 error', async () => {
+      // mock Discogs API
+      nock(API)
+        .get(/database/)
+        .reply(500)
+
+      await request(server)
+        .get('/search?q=Unknown&page=1')
+        .set('Accept', 'text/html')
+        .expect('Content-Type', /html/)
+        .expect(200)
     })
 
     it('responds with no search results page', async () => {

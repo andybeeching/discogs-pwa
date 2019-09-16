@@ -27,7 +27,7 @@ dotenv.config()
  * @returns {Promise}
  */
 async function apiClient(url) {
-  const networkRes = await fetch(url, {
+  const res = await fetch(url, {
     method: 'get',
     headers: {
       Authorization: `Discogs key=${process.env.APIKEY}, secret=${process.env.APISECRET}`,
@@ -36,16 +36,18 @@ async function apiClient(url) {
     }
   })
 
-  return networkRes.json()
+  // Discogs 500 errors are handled by `fetch`
+  return res.ok ? res.json() : Promise.reject(new Error('Discogs 500 error'))
 }
 
 /**
  * Fetches requested data from the cache or over the network
+ * NOTE: returns `null` if Discogs is down
  *
  * @param {String} url - Discogs API URL
  * @example https://api.discogs.com/releases/249504
  * @docs https://www.discogs.com/developers#page:home
- * @returns {Object}
+ * @returns {Object|null}
  */
 export default async function requestData(url) {
   const cachedRes = apiCache.get(url)
@@ -54,8 +56,11 @@ export default async function requestData(url) {
     return cachedRes
   }
 
-  const data = await apiClient(url)
-  apiCache.set(url, data)
-
-  return data
+  try {
+    const data = await apiClient(url)
+    apiCache.set(url, data)
+    return data
+  } catch (err) {
+    return null
+  }
 }
