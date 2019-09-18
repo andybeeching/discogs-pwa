@@ -148,8 +148,9 @@
  */
 .artwork {
   width: 100%;
-  max-height: var(--max-image-width);
-  object-fit: scale-down; /* 1 */
+  max-height: var(--max-image-height);
+  max-width: var(--max-image-width);
+  object-fit: contain; /* 1 */
   object-position: 0 0; /* 2 */
   margin-bottom: var(--vertical-rhythm);
 }

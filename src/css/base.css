@@ -33,6 +33,7 @@
    * also prevents them taking over the whole viewport!
    */
   --max-image-width: 600px;
+  --max-image-height: 600px;
   /*
    * minimum supported mobile device width, minus padding + grid gap
    * - equates to [2+*m] grids on all devices
