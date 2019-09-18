@@ -2,6 +2,7 @@ import spdy from 'spdy'
 import fs from 'fs'
 import express from 'express'
 import serveStatic from 'serve-static'
+import compression from 'compression'
 import stats from '../../dist/stats.json'
 
 import requestData from '../lib/apiClient.js'
@@ -32,6 +33,10 @@ app.use((req, res, next) => {
   res.set('Cache-Control', 'max-age=604800, must-revalidate')
   next()
 })
+
+// gflate compression
+// - static assets are too small to benefot from Brotli
+app.use(compression())
 
 // configure server for DEV vs PRODUCTION
 let header = head
