@@ -24,8 +24,10 @@ app.use(express.static(__dirname))
 // configure server for DEV vs PRODUCTION
 let header = head
 if (app.get('env') === 'development') {
-  // remove CSS link from head as (ftm) injected via dynamic style tags
-  // header = head.replace('main.css', '')
+  app.use((req, res, next) => {
+    console.log('request: ', req.url)
+    next()
+  })
 
   // tell express to use the webpack-dev-middleware and use the webpack.config.js
   // configuration file as a base.

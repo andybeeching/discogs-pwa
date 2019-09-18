@@ -4,9 +4,15 @@ import './css/base.css'
 import './css/typography.css'
 import './css/loader.css'
 import './css/style.css'
+import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 
 if (module.hot) {
   module.hot.accept() // eslint-disable-line no-undef
+}
+
+// register service worker
+if ('serviceWorker' in navigator) {
+  runtime.register()
 }
 
 const createApp = () => {
