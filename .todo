@@ -12,17 +12,12 @@ Stack:
     ✔ Add test harness @done(19-09-04 15:40)
     ✔ Add Husky hooks @done(19-09-16 17:03)
     ✔ Add HMR @done(19-09-06 13:29)
-    ☐ Figure out remote debugging for node, and front-end
+    ✔ Figure out remote debugging for node, and front-end @done(19-09-18 15:36)
     ☐ Tidy up git commit history
     ✔ Add .editconfig @done(19-09-08 15:04)
-    ☐ Add stylelint
-    ☐ Add autoprefixer
-    ☐ Add eslint-plugin-jsdoc
     ✘ Enable HRM with MiniCssExtractPlugin @cancelled(19-09-10 11:22)
     ☐ Consider adding CI (for fun)
     ☐ Write README
-    ☐ Consider using Phantom JS for DOM tests
-    ☐ Add Axe/pa11y-ci for a11y testing
 
 Front-End:
     ☐ Landing page
@@ -41,13 +36,12 @@ Front-End:
     ✔ Add 'loading' state @done(19-09-09 14:04)
     ☐ Add mapping for URL slugs
     ☐ Offline notification
-    ☐ Add service worker @started(19-09-18 11:37)
+    ✔ Add service worker @started(19-09-18 11:37) @done(19-09-18 15:06) @lasted(3h29m20s)
     ✔ Handle 4xx @done(19-09-16 14:40)
     ✔ Handle 5xx @done(19-09-16 15:34)
     ✔ Add lang and dir attribute @done(19-09-08 12:26)
     ☐ Add preload links
     ☐ Review meta tags
-    ☐ Consider adding nprogress bar
     ☐ ARIA
     ☐ History API integration
 
@@ -75,10 +69,10 @@ Improvements:
     ☐ Consider using Typescript or Flow annotations
     ☐ Use Marko to provide 'real' HTML stream rendering
     ☐ Get html-loader to work with static HTML (if not Marko)
-    ☐ Rename pwa.todo => .todo
+    ✔ Rename pwa.todo => .todo @done(19-09-18 15:38)
     ✔ Combine Jest config files (prefer jest.config.js) @done(19-09-16 15:34)
-    ☐ Add will-transform to loader
-    ☐ Double-check Artist pages have parallelised API calls
+    ✘ Add will-transform to loader @cancelled(19-09-18 15:30)
+    ✔ Double-check Artist pages have parallelised API calls @done(19-09-18 15:26)
     ☐ Handle out of bound pagination calls
     ☐ Rename artist => artistSummary template
     ☐ Rename server => app?
@@ -87,6 +81,11 @@ Improvements:
     ☐ Handle long-loading content for loader (aka add timeout)
     ☐ Use webpack-stats-plugin to glean static asset build info
     ☐ Change object-fit to cover for album art
+    ☐ Add stylelint
+    ☐ Add autoprefixer
+    ☐ Add eslint-plugin-jsdoc
+    ☐ Consider using Phantom JS for DOM tests
+    ☐ Add Axe/pa11y-ci for a11y testing
 
 Features:
     ☐ Enable album searching
@@ -95,3 +94,4 @@ Features:
     ☐ Bring in 3rd party data (e.g. Amazon/Spotify ratings)
     ☐ Add Analytics to track page views/times etc...
     ☐ RUM solution?
+    ☐ Consider adding nprogress bar
