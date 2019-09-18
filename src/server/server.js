@@ -1,6 +1,7 @@
 import spdy from 'spdy'
 import fs from 'fs'
 import express from 'express'
+import serveStatic from 'serve-static'
 import stats from '../../dist/stats.json'
 
 import requestData from '../lib/apiClient.js'
@@ -18,8 +19,19 @@ import config from '../../webpack.dev.config'
 
 const app = express()
 
-// statics
-app.use(express.static(__dirname))
+// caching rules for statics
+app.use(
+  serveStatic(__dirname, {
+    maxAge: 31536000,
+    immutable: true
+  })
+)
+
+// caching rules for page responses
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'max-age=604800, must-revalidate')
+  next()
+})
 
 // configure server for DEV vs PRODUCTION
 let header = head
