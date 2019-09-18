@@ -67,10 +67,12 @@ app.get('/artist/:artistId', async (req, res, next) => {
     return
   }
 
-  const artistData = await requestData(urls.getArtist(artistId))
-  const releaseData = await requestData(urls.getArtistReleases(artistId, page))
-
   res.type('.html').write(header + nav)
+
+  // issue requests in parallel
+  const artistReq = requestData(urls.getArtist(artistId))
+  const releaseReq = requestData(urls.getArtistReleases(artistId, page))
+  const [artistData, releaseData] = await Promise.all([artistReq, releaseReq])
 
   // return "Discogs down error"
   if (artistData === null || releaseData === null) {
