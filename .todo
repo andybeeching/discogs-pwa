@@ -60,7 +60,7 @@ Back-end:
     ✔ Handle API call errors @done(19-09-16 15:34)
     ✔ Enable HTTPS on localhost @done(19-09-08 13:21)
     ✔ Enable HTTP2 on localhost @done(19-09-08 18:03)
-    ☐ Implement Brotli for compression
+    ✔ Implement Gzip for compression @done(19-09-18 21:32)
     ✔ Add robots.txt @done(19-09-18 18:06)
     ☐ Helmet JS for header-based security
     ✔ Configure caching rules for assets (pages and statics) @done(19-09-18 21:17)
@@ -80,13 +80,14 @@ Improvements:
     ☐ Separate out routes from server.js
     ☐ Handle long-loading content for loader (aka add timeout)
     ☐ Use webpack-stats-plugin to glean static asset build info
-    ☐ Change object-fit to cover for album art
+    ✔ Change object-fit to cover for album art @done(19-09-18 21:23)
     ☐ Add stylelint
     ☐ Add autoprefixer
     ☐ Add eslint-plugin-jsdoc
     ☐ Consider using Phantom JS for DOM tests
     ☐ Add Axe/pa11y-ci for a11y testing
-    ☐ Strip dev comments from build
+    ☐ Strip dev comments from build (or use DEBUG env var)
+    ☐ Winston vs Bunyan for logging
 
 Features:
     ☐ Enable album searching
