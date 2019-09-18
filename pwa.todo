@@ -41,6 +41,7 @@ Front-End:
     ✔ Add 'loading' state @done(19-09-09 14:04)
     ☐ Add mapping for URL slugs
     ☐ Offline notification
+    ☐ Add service worker @started(19-09-18 11:37)
     ✔ Handle 4xx @done(19-09-16 14:40)
     ✔ Handle 5xx @done(19-09-16 15:34)
     ✔ Add lang and dir attribute @done(19-09-08 12:26)
@@ -48,6 +49,7 @@ Front-End:
     ☐ Review meta tags
     ☐ Consider adding nprogress bar
     ☐ ARIA
+    ☐ History API integration
 
 Back-end:
     ☐ Select host
@@ -67,11 +69,11 @@ Back-end:
     ☐ Implement Brotli for compression
     ☐ Add robots.txt
     ☐ Helmet JS for header-based security
+    ☐ Configure caching rules for assets (pages and statics)
 
 Improvements:
     ☐ Consider using Typescript or Flow annotations
     ☐ Use Marko to provide 'real' HTML stream rendering
-    ☐ History API integration
     ☐ Get html-loader to work with static HTML (if not Marko)
     ☐ Rename pwa.todo => .todo
     ✔ Combine Jest config files (prefer jest.config.js) @done(19-09-16 15:34)
@@ -82,6 +84,9 @@ Improvements:
     ☐ Rename server => app?
     ☐ server.test.js - make top-level generic nock routes
     ☐ Separate out routes from server.js
+    ☐ Handle long-loading content for loader (aka add timeout)
+    ☐ Use webpack-stats-plugin to glean static asset build info
+    ☐ Change object-fit to cover for album art
 
 Features:
     ☐ Enable album searching

@@ -1,5 +1,8 @@
 import * as constants from './lib/constants'
 
+// mock the service worker import
+jest.mock('serviceworker-webpack-plugin/lib/runtime', () => jest.fn())
+
 describe('index.js - in DOM', () => {
   let App = null
 

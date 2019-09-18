@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -59,6 +60,10 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash:6].css'
+    }),
+    // inject built asset name array into SW
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, './src/sw.js')
     }),
     new webpack.optimize.ModuleConcatenationPlugin()
   ]
