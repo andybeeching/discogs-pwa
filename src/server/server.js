@@ -24,6 +24,8 @@ app.use(express.static(__dirname))
 // configure server for DEV vs PRODUCTION
 let header = head
 if (app.get('env') === 'development') {
+  console.log('DEVELOPMENT SERVER')
+
   app.use((req, res, next) => {
     console.log('request: ', req.url)
     next()

@@ -52,7 +52,7 @@ self.addEventListener('activate', function(evt) {
 self.addEventListener('fetch', function(evt) {
   const { url } = evt.request
 
-  if (/^(?!.*(.css$|.js$))/.test(url)) {
+  if (/^(?!.*(.css$|.js$|.svg$))/.test(url)) {
     evt.respondWith(pageResponse(evt))
   }
 })

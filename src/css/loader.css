@@ -37,12 +37,17 @@
   content: ' ';
   position: absolute;
   display: block;
-  width: 75px;
-  height: 75px;
+  width: 100px;
+  height: 100px;
   animation: spin 1s ease-in-out infinite;
   border: 3px solid var(--color-green-accent);
   border-radius: 50%;
-  border-top-color: var(--color-darkgreen-accent);
+  background-image: url('./img/vinyl.svg');
+  background-size: cover;
+}
+
+.loader-vinyl {
+  fill: var(--color-green-accent);
 }
 
 @keyframes spin {
