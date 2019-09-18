@@ -48,6 +48,16 @@ describe('server.js', () => {
     nock.restore()
   })
 
+  describe('GET /robots.txt', () => {
+    it('responds with robots.txt', async () => {
+      await request(server)
+        .get('/robots.txt')
+        .set('Accept', 'text/plain')
+        .expect('Content-Type', /text/)
+        .expect(200)
+    })
+  })
+
   describe('GET /unknown', () => {
     it('responds with html of the 404 page', async () => {
       await request(server)

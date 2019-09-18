@@ -50,6 +50,11 @@ if (app.get('env') === 'development') {
   header = head.replace('main.css', main[0]).replace('main.js', main[1])
 }
 
+app.get('/robots.txt', function(req, res) {
+  res.type('text/plain')
+  res.send('User-agent: *\nDisallow: /')
+})
+
 // home page
 app.get('/', async (req, res) => {
   res.type('.html').write(header + nav)
