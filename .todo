@@ -86,6 +86,7 @@ Improvements:
     ☐ Add eslint-plugin-jsdoc
     ☐ Consider using Phantom JS for DOM tests
     ☐ Add Axe/pa11y-ci for a11y testing
+    ☐ Strip dev comments from build
 
 Features:
     ☐ Enable album searching
