@@ -50,9 +50,8 @@ self.addEventListener('activate', function(evt) {
 // - static resources already cached
 // - Discogs statics (images) cached by browser as opaque resources
 self.addEventListener('fetch', function(evt) {
-  const { url } = evt.request
-
-  if (/^(?!.*(.css$|.js$|.svg$))/.test(url)) {
+  // only triggered by html navigate (not asset requests)
+  if (evt.request.mode === 'navigate') {
     evt.respondWith(pageResponse(evt))
   }
 })
@@ -63,44 +62,29 @@ self.addEventListener('fetch', function(evt) {
 const pageResponse = async evt => {
   const req = evt.request
 
-  // `undefined` if cache miss
-  const cachedRes = await caches.match(req, {
-    ignoreVary: true
-  })
-
   try {
+    // copy response for caching
     const fetchRes = fetch(req)
+    const fetchResClone = fetchRes.then(res => res.clone())
 
     // keep service worker alive until resource cached
     evt.waitUntil(
       (async () => {
-        const res = await fetchRes
+        const res = await fetchResClone
 
-        // Check if we received a valid response
-        // - filters out opaque Discogs responses
+        // check if we received a valid response
+        // - also winnows out opaque responses
         if (!res || res.status !== 200 || res.type !== 'basic') {
           return res
         }
 
-        // IMPORTANT: Clone the response. A response is a stream
-        // and because we want the browser to consume the response
-        // as well as the cache consuming the response, we need
-        // to clone it so we have two streams.
-        const resToCache = res.clone()
         const cache = await caches.open(CACHE_NAME)
-
-        cache.put(req, resToCache)
+        cache.put(req, res)
         console.log(`[SW] Cache asset: ${new URL(req.url).href}`)
       })()
     )
 
-    // debug
-    // if (cachedRes) {
-    //   console.log(cachedRes)
-    //   console.log(`[SW] Returns cached asset for: ${new URL(req.url).href}`)
-    // }
-
-    return cachedRes || fetchRes
+    return (await caches.match(req, { ignoreVary: true })) || fetchRes
   } catch (err) {
     // TODO - display offline page instead...
     console.log(err)
