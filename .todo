@@ -20,7 +20,7 @@ Stack:
     ☐ Write README
 
 Front-End:
-    ☐ Landing page
+    ✔ Landing page @done(19-09-19 11:41)
         ✔ Implement partials @done(19-09-06 13:28)
     ✔ Artist page @done(19-09-09 14:04)
         ✔ Tweak measure to ensure it's not too long @done(19-09-09 14:04)
@@ -62,7 +62,7 @@ Back-end:
     ✔ Enable HTTP2 on localhost @done(19-09-08 18:03)
     ✔ Implement Gzip for compression @done(19-09-18 21:32)
     ✔ Add robots.txt @done(19-09-18 18:06)
-    ☐ Helmet JS for header-based security
+    ✔ Helmet JS for header-based security @done(19-09-19 09:57)
     ✔ Configure caching rules for assets (pages and statics) @done(19-09-18 21:17)
 
 Improvements:

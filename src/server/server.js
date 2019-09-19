@@ -60,6 +60,7 @@ let header = head
 if (app.get('env') === 'development') {
   console.log('DEVELOPMENT SERVER')
 
+  // log requested urls
   app.use((req, res, next) => {
     console.log('request: ', req.url)
     next()
@@ -92,7 +93,16 @@ app.get('/robots.txt', function(req, res) {
 // home page
 app.get('/', async (req, res) => {
   res.type('.html').write(header + nav)
-  res.write('Home Page')
+
+  const data = await requestData(urls.getRoot())
+
+  // return "Discogs down error"
+  if (data === null) {
+    res.write('Oh noes, it looks like Discogs is down :-(')
+  } else {
+    res.write(templates.root(data))
+  }
+
   res.write(foot)
   res.end()
 })

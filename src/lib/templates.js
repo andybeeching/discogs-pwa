@@ -4,6 +4,29 @@ import rbl from 'remove-blank-lines'
 const trim = str => rbl(str).trim()
 
 /**
+ * Render the Root page
+ *
+ * @param {Object} data - Discogs Search Result data entity
+ * @returns {String}
+ */
+export function root(data) {
+  // filter releases to major releases, and sort by latest release
+  const releases = data.results
+    .filter(item => !!item.master_id)
+    .map(item => {
+      item.id = item.master_id
+      return item
+    })
+
+  return trim(`
+    <h2>Currently trending on Discogs</h2>
+    <ul class="grid">
+      ${releases.map(item => getGridItem(item, 'release')).join('')}
+    </ul>
+  `)
+}
+
+/**
  * Render the Search Results page content
  *
  * @param {Object} data - Discogs Search Result data entity

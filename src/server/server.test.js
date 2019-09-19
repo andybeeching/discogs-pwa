@@ -3,6 +3,7 @@ import server from './server.js'
 import nock from 'nock'
 import { clearCache } from '../lib/apiClient'
 
+import ROOT_STUB from '../../__mocks__/stubs/root.json'
 import NO_SEARCH_RESULT_STUB from '../../__mocks__/stubs/searchNoResult.json'
 import SEARCH_RESULT_STUB from '../../__mocks__/stubs/searchResult.json'
 import ARTIST_STUB from '../../__mocks__/stubs/artist.json'
@@ -32,13 +33,8 @@ describe('server.js', () => {
     }
   })
 
-  beforeEach(() => {
-    // nock.disableNetConnect()
-  })
-
   afterEach(() => {
     nock.cleanAll()
-    // nock.enableNetConnect()
 
     // clear cache so as not to pollute across test cases
     clearCache()
@@ -69,7 +65,25 @@ describe('server.js', () => {
   })
 
   describe('GET /', () => {
+    it('responds with "Discogs down: for API 500 error', async () => {
+      // mock Discogs API
+      nock(API)
+        .get(/database/)
+        .reply(500)
+
+      await request(server)
+        .get('/')
+        .set('Accept', 'text/html')
+        .expect('Content-Type', /html/)
+        .expect(200)
+    })
+
     it('responds with html of the homepage', async () => {
+      // mock Discogs API
+      nock(API)
+        .get(/database/)
+        .reply(200, ROOT_STUB)
+
       await request(server)
         .get('/')
         .set('Accept', 'text/html')
