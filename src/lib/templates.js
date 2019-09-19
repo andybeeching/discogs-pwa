@@ -10,18 +10,10 @@ const trim = str => rbl(str).trim()
  * @returns {String}
  */
 export function root(data) {
-  // filter releases to major releases, and sort by latest release
-  const releases = data.results
-    .filter(item => !!item.master_id)
-    .map(item => {
-      item.id = item.master_id
-      return item
-    })
-
   return trim(`
     <h2>Currently trending on Discogs</h2>
     <ul class="grid">
-      ${releases.map(item => getGridItem(item, 'release')).join('')}
+      ${data.results.map(item => getGridItem(item, 'release')).join('')}
     </ul>
   `)
 }
@@ -179,25 +171,12 @@ export function artist(data) {
 
 /**
  * Renders artist releases in descending (by release date) order.
- * NOTE: Appearences on compilations are generally omitted to reduce 'noise'
  *
  * @param {Object} data - Discogs Artist Releases data entity
  * @param {Number} artistId - artist id
  * @returns {String}
  */
 export function releaseList(data, artistId) {
-  // filter releases to major releases, and sort by latest release
-  const releases = data.releases
-    .filter(
-      item =>
-        item.type === 'master' &&
-        item.artist !== 'Various' &&
-        item.role === 'Main'
-    )
-    .sort((a, b) => {
-      return b.year - a.year
-    })
-
   const slug = `/artist/${artistId}?`
   const pagination = getPagination(data.pagination, slug)
 
@@ -205,7 +184,7 @@ export function releaseList(data, artistId) {
     <h3 class="h3">Releases</h2>
     ${pagination}
     <ul class="grid">
-      ${releases.map(item => getGridItem(item, 'release')).join('')}
+      ${data.releases.map(item => getGridItem(item, item.type)).join('')}
     </ul>
     ${pagination}
   `)

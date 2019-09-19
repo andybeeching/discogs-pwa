@@ -40,7 +40,16 @@ export function getArtist(artistId) {
  * @example 12
  */
 export function getArtistReleases(artistId, page = 1) {
-  return `${PREFIX}/artists/${artistId}/releases?page=${page}`
+  return `${PREFIX}/artists/${artistId}/releases?sort=year&sort_order=desc&role=Main&page=${page}`
+}
+
+/**
+ * Returns API URL for a maste
+ *
+ * @param {Number} masterId
+ */
+export function getMaster(masterId) {
+  return `${PREFIX}/masters/${masterId}`
 }
 
 /**
@@ -49,5 +58,5 @@ export function getArtistReleases(artistId, page = 1) {
  * @param {Number} releaseId
  */
 export function getRelease(releaseId) {
-  return `${PREFIX}/masters/${releaseId}`
+  return `${PREFIX}/releases/${releaseId}`
 }

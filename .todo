@@ -89,6 +89,7 @@ Improvements:
     ☐ Strip dev comments from build (or use DEBUG env var)
     ☐ Winston vs Bunyan for logging
     ☐ Rewrite query strings for URL slugs
+    ☐ Figure out how to flush first html content from service worker
 
 Features:
     ☐ Enable album searching

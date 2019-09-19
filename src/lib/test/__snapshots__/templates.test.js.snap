@@ -122,6 +122,12 @@ exports[`templates.js releaseList() should render "release list" template 1`] = 
       </li>
     </ol>
     <ul class=\\"grid\\">
+    <li class=\\"grid-item\\">
+      <a href=\\"/release/957026\\">
+        <img src=\\"https://img.discogs.com/W3h5I5Xfo7m9t4924foueqrFAmA=/fit-in/150x150/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-957026-1389622269-8515.jpeg.jpg\\" />
+        <span class=\\"desc\\">Brave New World</span>
+      </a>
+    </li>
     </ul>
     <ol class=\\"pagination\\">
       <li>
@@ -143,7 +149,7 @@ exports[`templates.js root() should render "root" template 1`] = `
 "<h2>Currently trending on Discogs</h2>
     <ul class=\\"grid\\">
     <li class=\\"grid-item\\">
-      <a href=\\"/release/1353780\\">
+      <a href=\\"/release/13486052\\">
         <img src=\\"https://img.discogs.com/a30BikrMMGCgDsFY20CFcafi6Cg=/fit-in/150x150/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-13486052-1555118466-5371.jpeg.jpg\\" />
         <span class=\\"desc\\">The Mighty Boosh - The Mighty Boosh - The Complete Radio Series</span>
       </a>

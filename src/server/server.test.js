@@ -149,7 +149,7 @@ describe('server.js', () => {
     it('responds with "Discogs down" page for API 500 error', async () => {
       // mock Discogs API
       nock(API)
-        .get(/masters/)
+        .get(/releases/)
         .reply(500)
 
       await request(server)
@@ -162,7 +162,7 @@ describe('server.js', () => {
     it('responds with "unknown release" page for unknown IDs', async () => {
       // mock Discogs API
       nock(API)
-        .get(/masters/)
+        .get(/releases/)
         .reply(200, RELEASE_404_STUB)
 
       await request(server)
@@ -175,11 +175,52 @@ describe('server.js', () => {
     it('responds with release page', async () => {
       // mock Discogs API
       nock(API)
-        .get(/masters/)
+        .get(/releases/)
         .reply(200, RELEASE_STUB)
 
       await request(server)
         .get('/release/1')
+        .set('Accept', 'text/html')
+        .expect('Content-Type', /html/)
+        .expect(200)
+    })
+  })
+
+  describe('GET /master', () => {
+    it('responds with "Discogs down" page for API 500 error', async () => {
+      // mock Discogs API
+      nock(API)
+        .get(/masters/)
+        .reply(500)
+
+      await request(server)
+        .get('/master/1')
+        .set('Accept', 'text/html')
+        .expect('Content-Type', /html/)
+        .expect(200)
+    })
+
+    it('responds with "unknown master" page for unknown IDs', async () => {
+      // mock Discogs API
+      nock(API)
+        .get(/masters/)
+        .reply(200, RELEASE_404_STUB)
+
+      await request(server)
+        .get('/master/123456789')
+        .set('Accept', 'text/html')
+        .expect('Content-Type', /html/)
+        .expect(200)
+    })
+
+    it('responds with release page', async () => {
+      // mock Discogs API
+      nock(API)
+        .get(/masters/)
+        .reply(200, RELEASE_STUB)
+
+      await request(server)
+        .get('/master/1')
         .set('Accept', 'text/html')
         .expect('Content-Type', /html/)
         .expect(200)

@@ -144,6 +144,27 @@ app.get('/artist/:artistId', async (req, res, next) => {
   res.end()
 })
 
+// master page
+app.get('/master/:masterId', async (req, res) => {
+  res.type('.html').write(header + nav)
+
+  const data = await requestData(urls.getMaster(req.params.masterId))
+
+  // return "Discogs down error"
+  if (data === null) {
+    res.write('Oh noes, it looks like Discogs is down :-(')
+  }
+  // return "unknown release error" if negative Discogs lookup
+  else if (Object.keys(data).length === 1) {
+    res.write("Oh noes, this release doesn't exist :-(")
+  } else {
+    res.write(templates.release(data))
+  }
+
+  res.write(foot)
+  res.end()
+})
+
 // release page
 app.get('/release/:releaseId', async (req, res) => {
   res.type('.html').write(header + nav)
