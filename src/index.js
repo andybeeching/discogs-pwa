@@ -3,6 +3,7 @@ import * as constants from './lib/constants'
 import './css/base.css'
 import './css/typography.css'
 import './css/loader.css'
+import './css/toast.css'
 import './css/style.css'
 import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 
@@ -24,7 +25,7 @@ const createApp = () => {
     loaderTimerId = setTimeout(() => {
       const loader = document.querySelector(constants.LOADER_SELECTOR)
 
-      loader.classList.replace(constants.LOADER_HIDDEN, constants.LOADER_SHOWN)
+      loader.classList.replace(constants.IS_HIDDEN, constants.IS_SHOWN)
     }, constants.LOADER_DELAY)
   }
 
@@ -34,21 +35,46 @@ const createApp = () => {
 
     const loader = document.querySelector(constants.LOADER_SELECTOR)
 
-    if (loader.classList.contains(constants.LOADER_SHOWN)) {
+    if (loader.classList.contains(constants.IS_SHOWN)) {
       loader.addEventListener('transitionend', () =>
-        loader.classList.replace(
-          constants.LOADER_SHOWN,
-          constants.LOADER_HIDDEN
-        )
+        loader.classList.replace(constants.IS_SHOWN, constants.IS_HIDDEN)
       )
     }
-    loader.classList.add(constants.LOADER_LOADED)
+    loader.classList.add(constants.IS_LOADED)
+  }
+
+  const showOfflineNotification = () => {
+    const toast = document.querySelector(constants.TOAST_SELECTOR)
+    toast.classList.add(constants.IS_SHOWN)
+
+    setTimeout(() => {
+      toast.classList.remove(constants.IS_SHOWN)
+    }, constants.TOAST_DURATION)
+  }
+
+  const hideOfflineNotification = () => {
+    const toast = document.querySelector(constants.TOAST_SELECTOR)
+    toast.classList.remove(constants.IS_SHOWN)
+  }
+
+  const onlineHandler = () => {
+    hideOfflineNotification()
+  }
+
+  const offlineHandler = () => {
+    showOfflineNotification()
   }
 
   // must be 'load' as 'DOMContentLoaded' fires too soon
   window.addEventListener('load', hideLoader)
 
+  // offline indicator
+  window.addEventListener('online', onlineHandler)
+  window.addEventListener('offline', offlineHandler)
+
   return {
+    onlineHandler,
+    offlineHandler,
     showLoader,
     hideLoader,
     isAppLoaded: false
