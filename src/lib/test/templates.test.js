@@ -1,5 +1,6 @@
 import * as templates from '../templates'
 
+import ROOT_STUB from '../../../__mocks__/stubs/root.json'
 import NO_SEARCH_RESULT_STUB from '../../../__mocks__/stubs/searchNoResult.json'
 import SEARCH_RESULT_STUB from '../../../__mocks__/stubs/searchResult.json'
 import ARTIST_STUB from '../../../__mocks__/stubs/artist.json'
@@ -9,6 +10,13 @@ import PAGINATION_STUB from '../../../__mocks__/stubs/pagination.json'
 import MEMBERS_STUB from '../../../__mocks__/stubs/members.json'
 
 describe('templates.js', () => {
+  describe('root()', () => {
+    it('should render "root" template', () => {
+      const renderedTemplate = templates.root(ROOT_STUB)
+      expect(renderedTemplate).toMatchSnapshot()
+    })
+  })
+
   describe('artistsSearchResults()', () => {
     const SEARCH_TERM = 'The Beatles'
 

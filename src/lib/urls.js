@@ -3,6 +3,13 @@
 const PREFIX = 'https://api.discogs.com'
 
 /**
+ * Returns API URL for homepage
+ */
+export function getRoot() {
+  return `${PREFIX}/database/search?sort=hot%2Cdesc&ev=em_tr&year=2019&format=Vinyl`
+}
+
+/**
  * Returns API URL for a search term
  *
  * @param {String} query - unencoded search term

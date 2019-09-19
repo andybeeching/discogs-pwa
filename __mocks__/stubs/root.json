@@ -1,0 +1,58 @@
+{
+  "pagination": {
+    "per_page": 50,
+    "items": 20638194,
+    "page": 1,
+    "urls": {
+      "last": "https://api.discogs.com/database/search?sort=hot%2Cdesc&per_page=50&ev=em_tr&page=200&decade=2010",
+      "next": "https://api.discogs.com/database/search?sort=hot%2Cdesc&per_page=50&ev=em_tr&page=2&decade=2010"
+    },
+    "pages": 200
+  },
+  "results": [
+    {
+      "community": {
+        "have": 292,
+        "want": 253
+      },
+      "catno": "DEMRECBOX33",
+      "year": "2019",
+      "format_quantity": 3,
+      "id": 13486052,
+      "style": ["Comedy", "Radioplay"],
+      "thumb": "https://img.discogs.com/a30BikrMMGCgDsFY20CFcafi6Cg=/fit-in/150x150/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-13486052-1555118466-5371.jpeg.jpg",
+      "title": "The Mighty Boosh - The Mighty Boosh - The Complete Radio Series",
+      "label": ["Demon Records"],
+      "master_id": 1353780,
+      "type": "release",
+      "format": ["Vinyl", "LP", "Vinyl", "LP", "Vinyl", "LP"],
+      "barcode": ["5014797899360"],
+      "master_url": "https://api.discogs.com/masters/1353780",
+      "genre": ["Non-Music"],
+      "country": "UK & Europe",
+      "uri": "/The-Mighty-Boosh-The-Mighty-Boosh-The-Complete-Radio-Series/release/13486052",
+      "formats": [
+        {
+          "descriptions": ["LP"],
+          "text": "Yellow, 180g",
+          "name": "Vinyl",
+          "qty": "1"
+        },
+        {
+          "descriptions": ["LP"],
+          "text": "White, 180g",
+          "name": "Vinyl",
+          "qty": "1"
+        },
+        {
+          "descriptions": ["LP"],
+          "text": "Green, 180g",
+          "name": "Vinyl",
+          "qty": "1"
+        }
+      ],
+      "cover_image": "https://img.discogs.com/LEYV-b6KN7HbV7kpsl-XOFLFpPo=/fit-in/600x608/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-13486052-1555118466-5371.jpeg.jpg",
+      "resource_url": "https://api.discogs.com/releases/13486052"
+    }
+  ]
+}
