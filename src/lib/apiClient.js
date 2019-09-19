@@ -1,6 +1,9 @@
-import fetch from 'node-fetch'
 import LRU from 'lru-cache'
 import dotenv from 'dotenv'
+
+// require syntax needed for horrendous webpack/node issue with netlify
+// https://github.com/netlify/netlify-lambda/issues/142
+const fetch = require('node-fetch').default
 
 // Shelter the Discogs endpoints and help respect their rate limit with a
 // light-weight cache on this server process.
