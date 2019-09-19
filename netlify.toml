@@ -1,0 +1,34 @@
+[build]
+  command = "npm run build:prod"
+  functions = "functions"
+  publish = "dist"
+
+[[redirects]]
+  from = "/"
+  to = "/.netlify/functions/server"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/artist/*"
+  to = "/.netlify/functions/server/artist:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/release/*"
+  to = "/.netlify/functions/server/release:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/master/*"
+  to = "/.netlify/functions/server/master:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/search/*"
+  to = "/.netlify/functions/server/search:splat"
+  status = 200
+  force = true

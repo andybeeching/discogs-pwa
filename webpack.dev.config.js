@@ -1,14 +1,15 @@
 const path = require('path')
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
 
 module.exports = {
   entry: {
     main: [
-      // 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
       './src/index.js'
-    ]
+    ],
+    // mock out service worker
+    '__mocks__/moduleMock.js': './__mocks__/moduleMock.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -18,7 +19,6 @@ module.exports = {
   mode: 'development',
   target: 'web',
   devtool: 'inline-source-map',
-  // TODO: move this into server.js
   // devServer: {
   //   stats: {
   //     // Remove built modules information.
@@ -67,16 +67,18 @@ module.exports = {
     ]
   },
   plugins: [
-    // new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     // readable module names on HMR
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ['!./dist/server.js']
     }),
-    // inject built asset name array into SW
-    new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, './src/sw.js')
-    })
+    // ignore service worker import in main target
+    // this is because SW.js and HMR don't play nicely
+    new webpack.NormalModuleReplacementPlugin(
+      /serviceworker-webpack-plugin/,
+      path.resolve(__dirname, './__mocks__/moduleMock.js')
+    )
   ]
 }

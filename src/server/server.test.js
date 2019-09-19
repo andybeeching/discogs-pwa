@@ -1,5 +1,6 @@
 import request from 'supertest'
-import server from './server.js'
+import express from 'express'
+import createServer from './server.js'
 import nock from 'nock'
 import { clearCache } from '../lib/apiClient'
 
@@ -25,12 +26,17 @@ jest.mock('raw-loader!../partials/foot.html', () => '<footer></footer>', {
 })
 
 describe('server.js', () => {
+  let server
   const API = 'https://api.discogs.com'
 
   beforeAll(() => {
     if (!nock.isActive()) {
       nock.activate()
     }
+  })
+
+  beforeEach(() => {
+    server = createServer(express())
   })
 
   afterEach(() => {
@@ -108,7 +114,7 @@ describe('server.js', () => {
         .reply(500)
 
       await request(server)
-        .get('/artist/1?page=1')
+        .get('/artist/1/page/1')
         .set('Accept', 'text/html')
         .expect('Content-Type', /html/)
         .expect(200)
@@ -123,7 +129,7 @@ describe('server.js', () => {
         .reply(200, RELEASE_LIST_404_STUB)
 
       await request(server)
-        .get('/artist/123456789?page=1')
+        .get('/artist/123456789/page/1')
         .set('Accept', 'text/html')
         .expect('Content-Type', /html/)
         .expect(200)
@@ -138,7 +144,7 @@ describe('server.js', () => {
         .reply(200, RELEASE_LIST_STUB)
 
       await request(server)
-        .get('/artist/1?page=1')
+        .get('/artist/1/page/1')
         .set('Accept', 'text/html')
         .expect('Content-Type', /html/)
         .expect(200)
@@ -230,7 +236,19 @@ describe('server.js', () => {
   describe('GET /search', () => {
     it('redirects non-paginated requests to URL for first page', async () => {
       await request(server)
-        .get('/search?q=Beatles')
+        .get('/search/Beatles')
+        .expect(302)
+    })
+
+    it('redirects non-paginated II requests to URL for first page', async () => {
+      await request(server)
+        .get('/search/Beatles/')
+        .expect(302)
+    })
+
+    it('redirects non-paginated III requests to URL for first page', async () => {
+      await request(server)
+        .get('/search/Beatles/page/')
         .expect(302)
     })
 
@@ -241,7 +259,7 @@ describe('server.js', () => {
         .reply(500)
 
       await request(server)
-        .get('/search?q=Unknown&page=1')
+        .get('/search/Unknown/page/1')
         .set('Accept', 'text/html')
         .expect('Content-Type', /html/)
         .expect(200)
@@ -254,7 +272,7 @@ describe('server.js', () => {
         .reply(200, NO_SEARCH_RESULT_STUB)
 
       await request(server)
-        .get('/search?q=Unknown&page=1')
+        .get('/search/Unknown/page/1')
         .set('Accept', 'text/html')
         .expect('Content-Type', /html/)
         .expect(200)
@@ -267,10 +285,26 @@ describe('server.js', () => {
         .reply(200, SEARCH_RESULT_STUB)
 
       await request(server)
-        .get('/search?q=Beatles&page=1')
+        .get('/search/Beatles/page/1')
         .set('Accept', 'text/html')
         .expect('Content-Type', /html/)
         .expect(200)
+    })
+  })
+
+  describe('POST /search', () => {
+    it('redirects with search results page', async () => {
+      // mock Discogs API
+      nock(API)
+        .get(/database/)
+        .reply(200, SEARCH_RESULT_STUB)
+
+      await request(server)
+        .post('/search')
+        .send({ query: 'Beatles' })
+        .set('Accept', 'text/html')
+        .expect('Content-Type', /html/)
+        .expect(302)
     })
   })
 })

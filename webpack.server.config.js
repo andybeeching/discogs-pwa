@@ -3,7 +3,7 @@ const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   entry: {
-    server: './src/server/server.js'
+    server: './src/server/server-local.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),

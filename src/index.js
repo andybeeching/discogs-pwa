@@ -11,7 +11,7 @@ if (module.hot) {
   module.hot.accept() // eslint-disable-line no-undef
 } else {
   // register service worker
-  if ('serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator && !!runtime.register) {
     runtime.register()
   }
 }

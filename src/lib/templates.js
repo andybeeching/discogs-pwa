@@ -28,7 +28,7 @@ export function root(data) {
 export function artistsSearchResults(data, query) {
   const resultRange = getResultRange(data.pagination)
 
-  const slug = `/search?q=${encodeURIComponent(query)}&`
+  const slug = `/search/${encodeURIComponent(query)}/`
   const pagination = getPagination(data.pagination, slug)
 
   return trim(`
@@ -37,7 +37,7 @@ export function artistsSearchResults(data, query) {
     ${pagination}
     <ul class="grid">
       ${data.results
-        .map(item => getGridItem(item, 'artist', 'page=1'))
+        .map(item => getGridItem(item, 'artist', '/page/1'))
         .join('')}
     </ul>
     ${pagination}
@@ -85,28 +85,28 @@ export function getPagination(pagination, slug) {
         ${
           page === 1
             ? `<span class="disabled-link">&laquo;</span>`
-            : `<a href="${slug}page=1">&laquo;</a>`
+            : `<a href="${slug}page/1">&laquo;</a>`
         }
       </li>
       <li>
         ${
           page === 1
             ? `<span class="disabled-link">Previous page</span>`
-            : `<a href="${slug}page=${pagination.page - 1}">Previous page</a>`
+            : `<a href="${slug}page/${pagination.page - 1}">Previous page</a>`
         }
       </li>
       <li>
         ${
           page === pages
             ? `<span class="disabled-link">Next page</span>`
-            : `<a href="${slug}page=${pagination.page + 1}">Next page</a>`
+            : `<a href="${slug}page/${pagination.page + 1}">Next page</a>`
         }
       </li>
       <li>
         ${
           page === pages
             ? `<span class="disabled-link">&raquo;</span>`
-            : `<a href="${slug}page=${pages}">&raquo;</a>`
+            : `<a href="${slug}page/${pages}">&raquo;</a>`
         }
       </li>
     </ol>
@@ -120,15 +120,15 @@ export function getPagination(pagination, slug) {
  * @param {Object} item - Discogs Artist or Release data entity
  * @param {String} slug - URL encoded PWA endpoint for related requests
  * @example 'artist'
- * @param {String} params - additional parameters to append to releated URLs
+ * @param {String} trailing - additional string to append to releated URLs
  * @optional
  * @example 'page=1'
  * @returns {String}
  */
-function getGridItem(item, slug, params) {
+function getGridItem(item, slug, trailing = '') {
   return `
     <li class="grid-item">
-      <a href="/${slug}/${item.id}${params ? `?${params}` : ''}">
+      <a href="/${slug}/${item.id}${trailing}">
         <img src="${item.thumb}" />
         <span class="desc">${item.title}</span>
       </a>
@@ -150,7 +150,7 @@ export function explodeArtists(artists) {
       const leadingChars = idx > 0 && isLast ? 'and ' : ''
       const trailingChars = !isLast && !leadingChars ? ', ' : ''
 
-      return `${leadingChars}<a href="/artist/${item.id}?page=1">${item.name}</a>${trailingChars}`
+      return `${leadingChars}<a href="/artist/${item.id}/page/1">${item.name}</a>${trailingChars}`
     })
     .join('')
 }
@@ -177,7 +177,7 @@ export function artist(data) {
  * @returns {String}
  */
 export function releaseList(data, artistId) {
-  const slug = `/artist/${artistId}?`
+  const slug = `/artist/${artistId}/`
   const pagination = getPagination(data.pagination, slug)
 
   return trim(`
