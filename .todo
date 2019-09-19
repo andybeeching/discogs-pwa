@@ -88,6 +88,7 @@ Improvements:
     ☐ Add Axe/pa11y-ci for a11y testing
     ☐ Strip dev comments from build (or use DEBUG env var)
     ☐ Winston vs Bunyan for logging
+    ☐ Rewrite query strings for URL slugs
 
 Features:
     ☐ Enable album searching

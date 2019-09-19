@@ -3,6 +3,7 @@ import fs from 'fs'
 import express from 'express'
 import serveStatic from 'serve-static'
 import compression from 'compression'
+import helmet from 'helmet'
 import stats from '../../dist/stats.json'
 
 import requestData from '../lib/apiClient.js'
@@ -34,9 +35,25 @@ app.use((req, res, next) => {
   next()
 })
 
-// gflate compression
-// - static assets are too small to benefot from Brotli
+// gzip compression
+// - static assets are too small to benefit from Brotli
 app.use(compression())
+
+// security
+app.use(helmet())
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      blockAllMixedContent: true,
+      upgradeInsecureRequests: true,
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", 'https://img.discogs.com'],
+      objectSrc: ["'none'"]
+    }
+  })
+)
 
 // configure server for DEV vs PRODUCTION
 let header = head
