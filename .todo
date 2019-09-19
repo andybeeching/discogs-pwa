@@ -16,7 +16,6 @@ Stack:
     ☐ Tidy up git commit history
     ✔ Add .editconfig @done(19-09-08 15:04)
     ✘ Enable HRM with MiniCssExtractPlugin @cancelled(19-09-10 11:22)
-    ☐ Consider adding CI (for fun)
     ☐ Write README
 
 Front-End:
@@ -31,19 +30,12 @@ Front-End:
     ✔ Results page @done(19-09-09 14:04)
         ✔ Handle no search results @done(19-09-08 14:58)
         ✔ Handle pagination @done(19-09-08 12:24)
-        ☐ Handle layout shift with image loading (+ loader dismissal)
-        ☐ Consider increasing results size to 100 for streaming experiments
     ✔ Add 'loading' state @done(19-09-09 14:04)
-    ☐ Add mapping for URL slugs
-    ☐ Offline notification
+    ✔ Offline notification @done(19-09-19 14:32)
     ✔ Add service worker @started(19-09-18 11:37) @done(19-09-18 15:06) @lasted(3h29m20s)
     ✔ Handle 4xx @done(19-09-16 14:40)
     ✔ Handle 5xx @done(19-09-16 15:34)
     ✔ Add lang and dir attribute @done(19-09-08 12:26)
-    ☐ Add preload links
-    ☐ Review meta tags
-    ☐ ARIA
-    ☐ History API integration
 
 Back-end:
     ☐ Select host
@@ -90,6 +82,14 @@ Improvements:
     ☐ Winston vs Bunyan for logging
     ☐ Rewrite query strings for URL slugs
     ☐ Figure out how to flush first html content from service worker
+    ☐ Consider adding CI (for fun)
+    ☐ Handle layout shift with
+    ☐ Add preload links
+    ☐ Review meta tags
+    ☐ ARIA
+    ☐ History API integration
+    ☐ Add mapping for URL slugs
+    ☐ Add title to each page
 
 Features:
     ☐ Enable album searching
