@@ -10,8 +10,8 @@
   force = true
 
 [[redirects]]
-  from = "/artist/*"
-  to = "/.netlify/functions/server/artist:splat"
+  from = "/artist/* page=:page"
+  to = "/.netlify/functions/server/artist:splat?:page"
   status = 200
   force = true
 
