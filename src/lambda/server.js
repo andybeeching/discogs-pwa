@@ -1,4 +1,5 @@
 import express from 'express'
+import { sanitizeBody } from 'express-validator'
 import serveStatic from 'serve-static'
 import compression from 'compression'
 import helmet from 'helmet'
@@ -14,19 +15,24 @@ import foot from 'raw-loader!../partials/foot.html'
 
 const app = express()
 
-// caching rules for statics
-app.use(
-  serveStatic(__dirname, {
-    maxAge: 31536000,
-    immutable: true
-  })
-)
+// parse POST data
+app.use(express.json())
+app.use(express.urlencoded())
 
-// caching rules for page responses
-app.use((req, res, next) => {
-  res.set('Cache-Control', 'max-age=604800, must-revalidate')
-  next()
-})
+app.use(express.static(__dirname))
+// caching rules for statics
+// app.use(
+//   serveStatic(__dirname, {
+//     maxAge: 31536000,
+//     immutable: true
+//   })
+// )
+
+// // caching rules for page responses
+// app.use((req, res, next) => {
+//   res.set('Cache-Control', 'max-age=604800, must-revalidate')
+//   next()
+// })
 
 // gzip compression
 // - static assets are too small to benefit from Brotli
@@ -85,21 +91,22 @@ router.get('/', async (req, res) => {
 })
 
 // artist page
-router.get('/artist/:artistId', async (req, res, next) => {
-  const { artistId } = req.params
-  const { page = null } = req.query
-
-  // cool URIs
-  if (!page) {
-    res.redirect(`/artist/${artistId}?page=1`)
-    return
+router.get(
+  ['/artist/:artistId', '/artist/:artistId/page/'],
+  async (req, res, next) => {
+    const { artistId } = req.params
+    res.redirect(`/artist/${artistId}/page/1`)
   }
+)
+
+router.get('/artist/:artistId/page/:pageId', async (req, res, next) => {
+  const { artistId, pageId } = req.params
 
   res.type('.html').write(header + nav)
 
   // issue requests in parallel
   const artistReq = requestData(urls.getArtist(artistId))
-  const releaseReq = requestData(urls.getArtistReleases(artistId, page))
+  const releaseReq = requestData(urls.getArtistReleases(artistId, pageId))
   const [artistData, releaseData] = await Promise.all([artistReq, releaseReq])
 
   // return "Discogs down error"
@@ -164,18 +171,36 @@ router.get('/release/:releaseId', async (req, res) => {
 })
 
 // search page
-router.get('/search', async (req, res) => {
-  const { q: query, page = 1 } = req.query
+router.post(
+  '/search',
+  [
+    sanitizeBody('query')
+      .trim()
+      .escape()
+  ],
+  (req, res) => {
+    const { query } = req.body
 
-  // cool URIs
-  // if (!page) {
-  //   res.redirect(`/search?q=${query}&page=1`)
-  //   return
-  // }
+    res.redirect(`/search/${query}/page/1`)
+    res.end()
+  }
+)
+
+// artist page
+router.get(
+  ['/search:query', '/search/:query/', '/search/:query/page/'],
+  async (req, res, next) => {
+    const { query } = req.params
+    res.redirect(`/search/${query}/page/1`)
+  }
+)
+
+router.get('/search/:query/page/:pageId', async (req, res) => {
+  const { query, pageId } = req.params
 
   res.type('.html').write(header + nav)
 
-  const data = await requestData(urls.getArtistSearch(query, page))
+  const data = await requestData(urls.getArtistSearch(query, pageId))
 
   // return "Discogs down error"
   if (data === null) {
@@ -195,7 +220,6 @@ router.use((req, res) => {
     .type('.html')
     .write(header + nav)
   res.write("Oh noes, the page you're looking for doesn't exist!")
-  res.write(JSON.stringify(req))
   res.write(foot)
   res.end()
 })
