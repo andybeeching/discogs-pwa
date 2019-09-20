@@ -11,10 +11,9 @@
 
 [[redirects]]
   from = "/artist/*"
-  to = "/.netlify/functions/server/artist:splat?page=:page"
+  to = "/.netlify/functions/server/artist:splat"
   status = 200
   force = true
-  query = {page = ":page"}
 
 [[redirects]]
   from = "/release/*"
@@ -29,7 +28,7 @@
   force = true
 
 [[redirects]]
-  from = "/search"
-  to = "/.netlify/functions/server/search"
+  from = "/search/*"
+  to = "/.netlify/functions/server/search:splat"
   status = 200
   force = true
