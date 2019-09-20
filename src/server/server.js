@@ -200,7 +200,7 @@ router.use((req, res) => {
 })
 
 // 5xx
-router.use(function(err, req, res) {
+router.use((err, req, res) => {
   res
     .status(500)
     .type('.html')
@@ -211,7 +211,7 @@ router.use(function(err, req, res) {
   res.end()
 })
 
-app.use('/', router)
+// app.use('/', router)
 app.use('/.netlify/functions/server', router)
 
 export default app
