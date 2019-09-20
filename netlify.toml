@@ -10,10 +10,11 @@
   force = true
 
 [[redirects]]
-  from = "/artist/* page=:page"
-  to = "/.netlify/functions/server/artist:splat?:page"
+  from = "/artist/*:page"
+  to = "/.netlify/functions/server/artist:splat"
   status = 200
   force = true
+  query = {page = ":page"}
 
 [[redirects]]
   from = "/release/*"
@@ -28,7 +29,8 @@
   force = true
 
 [[redirects]]
-  from = "/search"
+  from = "/search:q"
   to = "/.netlify/functions/server/search"
   status = 200
   force = true
+  query = {q = ":q"}
