@@ -165,13 +165,13 @@ router.get('/release/:releaseId', async (req, res) => {
 
 // search page
 router.get('/search', async (req, res) => {
-  const { q: query, page = null } = req.query
+  const { q: query, page = 1 } = req.query
 
-  // cool URIs
-  if (!page) {
-    res.redirect(`/search?q=${query}&page=1`)
-    return
-  }
+  // // cool URIs
+  // if (!page) {
+  //   res.redirect(`/search?q=${query}&page=1`)
+  //   return
+  // }
 
   res.type('.html').write(header + nav)
 
