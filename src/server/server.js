@@ -195,6 +195,7 @@ router.use((req, res) => {
     .type('.html')
     .write(header + nav)
   res.write("Oh noes, the page you're looking for doesn't exist!")
+  res.write(JSON.stringify(req))
   res.write(foot)
   res.end()
 })
@@ -211,7 +212,7 @@ router.use((err, req, res) => {
   res.end()
 })
 
-// app.use('/', router)
+app.use('/', router)
 app.use('/.netlify/functions/server', router)
 
 export default app
