@@ -53,6 +53,12 @@ app.use(
 const { main } = stats.assetsByChunkName
 const header = head.replace('main.css', main[0]).replace('main.js', main[1])
 
+// log requested urls
+app.use((req, res, next) => {
+  console.log('request: ', req.url)
+  next()
+})
+
 // routes
 const router = express.Router()
 
