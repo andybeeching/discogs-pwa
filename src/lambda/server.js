@@ -53,6 +53,12 @@ app.use(
 const { main } = stats.assetsByChunkName
 const header = head.replace('main.css', main[0]).replace('main.js', main[1])
 
+// log requested urls
+app.use((req, res, next) => {
+  console.log('request: ', req.url)
+  next()
+})
+
 // routes
 const router = express.Router()
 
@@ -159,13 +165,13 @@ router.get('/release/:releaseId', async (req, res) => {
 
 // search page
 router.get('/search', async (req, res) => {
-  const { q: query, page = null } = req.query
+  const { q: query, page = 1 } = req.query
 
   // cool URIs
-  if (!page) {
-    res.redirect(`/search?q=${query}&page=1`)
-    return
-  }
+  // if (!page) {
+  //   res.redirect(`/search?q=${query}&page=1`)
+  //   return
+  // }
 
   res.type('.html').write(header + nav)
 
@@ -189,6 +195,7 @@ router.use((req, res) => {
     .type('.html')
     .write(header + nav)
   res.write("Oh noes, the page you're looking for doesn't exist!")
+  res.write(JSON.stringify(req))
   res.write(foot)
   res.end()
 })
