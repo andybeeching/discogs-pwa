@@ -4,7 +4,13 @@
   publish = "dist"
 
 [[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server/:splat"
+  from = "/"
+  to = "/.netlify/functions/server/"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/artist/*"
+  to = "/.netlify/functions/server/artist:splat"
   status = 200
   force = true
