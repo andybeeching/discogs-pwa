@@ -2,8 +2,3 @@
   command = "npm run build:prod"
   functions = "functions"
   publish = "dist"
-
-# A basic redirect rule
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server:splat"
