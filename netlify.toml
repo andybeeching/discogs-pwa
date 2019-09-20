@@ -3,5 +3,7 @@
   functions = "functions"
   publish = "dist"
 
-[dev]
-  publish = "dist"
+# A basic redirect rule
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server:splat"
