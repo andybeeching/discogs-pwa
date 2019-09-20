@@ -23,12 +23,12 @@
 
 [[redirects]]
   from = "/master/*"
-  to = "/.netlify/functions/master:splat"
+  to = "/.netlify/functions/server/master:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/search/*"
-  to = "/.netlify/functions/master:splat"
+  to = "/.netlify/functions/server/search:splat"
   status = 200
   force = true
