@@ -11,7 +11,7 @@
 
 [[redirects]]
   from = "/artist/*"
-  to = "/.netlify/functions/server/artist:splat"
+  to = "/.netlify/functions/server/artist:splat?page=:page"
   status = 200
   force = true
   query = {page = ":page"}
