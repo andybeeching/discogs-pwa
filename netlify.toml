@@ -10,7 +10,7 @@
   force = true
 
 [[redirects]]
-  from = "/artist/*:page"
+  from = "/artist/*"
   to = "/.netlify/functions/server/artist:splat"
   status = 200
   force = true
@@ -29,7 +29,7 @@
   force = true
 
 [[redirects]]
-  from = "/search:q"
+  from = "/search"
   to = "/.netlify/functions/server/search"
   status = 200
   force = true
