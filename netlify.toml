@@ -14,6 +14,7 @@
   to = "/.netlify/functions/server/artist:splat"
   status = 200
   force = true
+  query = {page = ":page"}
 
 [[redirects]]
   from = "/release/*"
