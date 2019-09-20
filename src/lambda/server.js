@@ -201,7 +201,7 @@ router.use((req, res) => {
 })
 
 // 5xx
-router.use(function(err, req, res) {
+router.use((err, req, res) => {
   res
     .status(500)
     .type('.html')

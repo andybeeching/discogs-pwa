@@ -4,7 +4,7 @@ exports[`templates.js artist() should render "artist" template 1`] = `
 "
     <h2 class=\\"h2\\">Kings Of Convenience</h2>
     <p>Kings of Convenience are an indie folk-pop duo from Bergen, Norway. Consisting of Erlend Øye and Eirik Glambek Bøe, the musical group is known for their delicate tunes, calming voices, and intricately subtle guitar melodies. Both Øye and Bøe sing in their tracks, and both of them compose.</p>
-    <p>Members: <a href=\\"/artist/82343?page=1\\">Erlend Øye</a>, and <a href=\\"/artist/462316?page=1\\">Eirik Glambek Bøe</a></p>
+    <p>Members: <a href=\\"/artist/82343/page/1\\">Erlend Øye</a>, and <a href=\\"/artist/462316/page/1\\">Eirik Glambek Bøe</a></p>
   "
 `;
 
@@ -20,7 +20,7 @@ exports[`templates.js artistsSearchResults() should render "results found" templ
       <p>1 results were found, viewing 1 to 1</p>
     <ul class=\\"grid\\">
     <li class=\\"grid-item\\">
-      <a href=\\"/artist/82730?page=1\\">
+      <a href=\\"/artist/82730/page/1\\">
         <img src=\\"https://img.discogs.com/nSd8gtJIO-fTzvI6C5BrXxv4YuQ=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-82730-1319532331.jpeg.jpg\\" />
         <span class=\\"desc\\">The Beatles</span>
       </a>
@@ -28,11 +28,11 @@ exports[`templates.js artistsSearchResults() should render "results found" templ
     </ul>"
 `;
 
-exports[`templates.js explodeArtists() should handle multiple artists 1`] = `"<a href=\\"/artist/82343?page=1\\">Erlend Øye</a>, <a href=\\"/artist/462316?page=1\\">Eirik Glambek Bøe</a>, and <a href=\\"/artist/123456?page=1\\">Feist</a>"`;
+exports[`templates.js explodeArtists() should handle multiple artists 1`] = `"<a href=\\"/artist/82343/page/1\\">Erlend Øye</a>, <a href=\\"/artist/462316/page/1\\">Eirik Glambek Bøe</a>, and <a href=\\"/artist/123456/page/1\\">Feist</a>"`;
 
-exports[`templates.js explodeArtists() should handle single artist 1`] = `"<a href=\\"/artist/82343?page=1\\">Erlend Øye</a>"`;
+exports[`templates.js explodeArtists() should handle single artist 1`] = `"<a href=\\"/artist/82343/page/1\\">Erlend Øye</a>"`;
 
-exports[`templates.js explodeArtists() should handle two artists 1`] = `"<a href=\\"/artist/82343?page=1\\">Erlend Øye</a>, and <a href=\\"/artist/462316?page=1\\">Eirik Glambek Bøe</a>"`;
+exports[`templates.js explodeArtists() should handle two artists 1`] = `"<a href=\\"/artist/82343/page/1\\">Erlend Øye</a>, and <a href=\\"/artist/462316/page/1\\">Eirik Glambek Bøe</a>"`;
 
 exports[`templates.js getPagination() should handle empty pagination object 1`] = `""`;
 
@@ -46,10 +46,10 @@ exports[`templates.js getPagination() should handle first page pagination object
         <span class=\\"disabled-link\\">Previous page</span>
       </li>
       <li>
-        <a href=\\"/endpoint?page=2\\">Next page</a>
+        <a href=\\"/endpoint?page/2\\">Next page</a>
       </li>
       <li>
-        <a href=\\"/endpoint?page=20\\">&raquo;</a>
+        <a href=\\"/endpoint?page/20\\">&raquo;</a>
       </li>
     </ol>
   "
@@ -59,10 +59,10 @@ exports[`templates.js getPagination() should handle last page pagination object 
 "
     <ol class=\\"pagination\\">
       <li>
-        <a href=\\"/endpoint?page=1\\">&laquo;</a>
+        <a href=\\"/endpoint?page/1\\">&laquo;</a>
       </li>
       <li>
-        <a href=\\"/endpoint?page=19\\">Previous page</a>
+        <a href=\\"/endpoint?page/19\\">Previous page</a>
       </li>
       <li>
         <span class=\\"disabled-link\\">Next page</span>
@@ -78,16 +78,16 @@ exports[`templates.js getPagination() should handle middle page pagination objec
 "
     <ol class=\\"pagination\\">
       <li>
-        <a href=\\"/endpoint?page=1\\">&laquo;</a>
+        <a href=\\"/endpoint?page/1\\">&laquo;</a>
       </li>
       <li>
-        <a href=\\"/endpoint?page=9\\">Previous page</a>
+        <a href=\\"/endpoint?page/9\\">Previous page</a>
       </li>
       <li>
-        <a href=\\"/endpoint?page=11\\">Next page</a>
+        <a href=\\"/endpoint?page/11\\">Next page</a>
       </li>
       <li>
-        <a href=\\"/endpoint?page=20\\">&raquo;</a>
+        <a href=\\"/endpoint?page/20\\">&raquo;</a>
       </li>
     </ol>
   "
@@ -95,7 +95,7 @@ exports[`templates.js getPagination() should handle middle page pagination objec
 
 exports[`templates.js release() should render "release" template 1`] = `
 "<h2 class=\\"h2\\">Quiet Is The New Loud</h2>
-    <p>By <a href=\\"/artist/12634?page=1\\">Kings Of Convenience</a></p>
+    <p>By <a href=\\"/artist/12634/page/1\\">Kings Of Convenience</a></p>
     <div>
       <img src=\\"https://img.discogs.com/W1ebskmATPP9dg6a2nWlvKk7Tmw=/fit-in/600x586/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-76745-1237046610.jpeg.jpg\\" class=\\"artwork\\" />
     </div>
@@ -115,10 +115,10 @@ exports[`templates.js releaseList() should render "release list" template 1`] = 
         <span class=\\"disabled-link\\">Previous page</span>
       </li>
       <li>
-        <a href=\\"/artist/undefined?page=2\\">Next page</a>
+        <a href=\\"/artist/undefined/page/2\\">Next page</a>
       </li>
       <li>
-        <a href=\\"/artist/undefined?page=6\\">&raquo;</a>
+        <a href=\\"/artist/undefined/page/6\\">&raquo;</a>
       </li>
     </ol>
     <ul class=\\"grid\\">
@@ -137,10 +137,10 @@ exports[`templates.js releaseList() should render "release list" template 1`] = 
         <span class=\\"disabled-link\\">Previous page</span>
       </li>
       <li>
-        <a href=\\"/artist/undefined?page=2\\">Next page</a>
+        <a href=\\"/artist/undefined/page/2\\">Next page</a>
       </li>
       <li>
-        <a href=\\"/artist/undefined?page=6\\">&raquo;</a>
+        <a href=\\"/artist/undefined/page/6\\">&raquo;</a>
       </li>
     </ol>"
 `;
