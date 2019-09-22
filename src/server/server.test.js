@@ -1,5 +1,6 @@
 import request from 'supertest'
-import server from './server.js'
+import express from 'express'
+import createServer from './server.js'
 import nock from 'nock'
 import { clearCache } from '../lib/apiClient'
 
@@ -25,12 +26,17 @@ jest.mock('raw-loader!../partials/foot.html', () => '<footer></footer>', {
 })
 
 describe('server.js', () => {
+  let server
   const API = 'https://api.discogs.com'
 
   beforeAll(() => {
     if (!nock.isActive()) {
       nock.activate()
     }
+  })
+
+  beforeEach(() => {
+    server = createServer(express())
   })
 
   afterEach(() => {

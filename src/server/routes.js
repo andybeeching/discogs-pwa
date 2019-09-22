@@ -19,7 +19,7 @@ export default app => {
 
   // parse POST data
   app.use(express.json())
-  app.use(express.urlencoded())
+  app.use(express.urlencoded({ extended: true }))
 
   // routes
   const router = express.Router()
