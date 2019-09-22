@@ -7,6 +7,7 @@ const app = createServer(express())
 const router = createRouter()
 
 // netlify mount point
+app.use('/', router)
 app.use('/.netlify/functions/server', router)
 
 // serverless maps AWS requests to express
