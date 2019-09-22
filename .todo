@@ -38,8 +38,8 @@ Front-End:
     ✔ Add lang and dir attribute @done(19-09-08 12:26)
 
 Back-end:
-    ☐ Select host
-    ☐ Setup deployment to host
+    ✔ Select host @done(19-09-20 21:41)
+    ✔ Setup deployment to host @done(19-09-20 21:41)
     ✔ Setup local server @done(19-09-04 15:40)
     ✔ Implement basic shell (no API content) @done(19-09-06 13:30)
     ✔ Implement route-url matching @done(19-09-06 13:30)
@@ -67,7 +67,7 @@ Improvements:
     ✔ Double-check Artist pages have parallelised API calls @done(19-09-18 15:26)
     ☐ Handle out of bound pagination calls
     ☐ Rename artist => artistSummary template
-    ☐ Rename server => app?
+    ✘ Rename server => app? @cancelled(19-09-20 21:41)
     ☐ server.test.js - make top-level generic nock routes
     ☐ Separate out routes from server.js
     ☐ Handle long-loading content for loader (aka add timeout)
@@ -90,6 +90,8 @@ Improvements:
     ☐ History API integration
     ☐ Add mapping for URL slugs
     ☐ Add title to each page
+    ☐ Make HMR and service workers in DEV work
+    ☐ Ensure service worker registration doesn't block main thread
 
 Features:
     ☐ Enable album searching

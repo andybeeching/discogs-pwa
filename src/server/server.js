@@ -1,243 +1,50 @@
 import express from 'express'
-import { sanitizeBody } from 'express-validator'
 import serveStatic from 'serve-static'
 import compression from 'compression'
 import helmet from 'helmet'
-import stats from '../../dist/stats.json'
-import serverless from 'serverless-http'
+import createRouter from './routes'
 
-import requestData from '../lib/apiClient.js'
-import * as templates from '../lib/templates.js'
-import * as urls from '../lib/urls.js'
-import head from 'raw-loader!../partials/head.html'
-import nav from 'raw-loader!../partials/nav.html'
-import foot from 'raw-loader!../partials/foot.html'
-
-const app = express()
-
-// parse POST data
-app.use(express.json())
-app.use(express.urlencoded())
-
-app.use(express.static(__dirname))
-// caching rules for statics
-// app.use(
-//   serveStatic(__dirname, {
-//     maxAge: 31536000,
-//     immutable: true
-//   })
-// )
-
-// // caching rules for page responses
-// app.use((req, res, next) => {
-//   res.set('Cache-Control', 'max-age=604800, must-revalidate')
-//   next()
-// })
-
-// gzip compression
-// - static assets are too small to benefit from Brotli
-app.use(compression())
-
-// security
-app.use(helmet())
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      blockAllMixedContent: true,
-      upgradeInsecureRequests: true,
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", 'https://img.discogs.com'],
-      objectSrc: ["'none'"]
-    }
-  })
-)
-
-// asset URL rewriting
-// - replace hydrated CSS and JS with latest build
-const { main } = stats.assetsByChunkName
-const header = head.replace('main.css', main[0]).replace('main.js', main[1])
-
-// log requested urls
-app.use((req, res, next) => {
-  console.log('request: ', req.url)
-  next()
-})
-
-// routes
-const router = express.Router()
-
-router.get('/robots.txt', function(req, res) {
-  res.type('text/plain')
-  res.send('User-agent: *\nDisallow: /')
-})
-
-// home page
-router.get('/', async (req, res) => {
-  res.type('.html').write(header + nav)
-
-  const data = await requestData(urls.getRoot())
-
-  // return "Discogs down error"
-  if (data === null) {
-    res.write('Oh noes, it looks like Discogs is down :-(')
+export default app => {
+  if (app.get('env') === 'development') {
+    // map statics - no caching
+    app.use(express.static(__dirname))
   } else {
-    res.write(templates.root(data))
+    // map statics and apply caching
+    app.use(
+      serveStatic(__dirname, {
+        maxAge: 31536000,
+        immutable: true
+      })
+    )
+
+    // caching rules for page responses
+    app.use((req, res, next) => {
+      res.set('Cache-Control', 'max-age=604800, must-revalidate')
+      next()
+    })
   }
 
-  res.write(foot)
-  res.end()
-})
+  // gzip compression
+  // - static assets are too small to benefit from Brotli
+  app.use(compression())
 
-// artist page
-router.get(
-  ['/artist/:artistId', '/artist/:artistId/page/'],
-  async (req, res, next) => {
-    const { artistId } = req.params
-    res.redirect(`/artist/${artistId}/page/1`)
-  }
-)
+  // security
+  app.use(helmet())
+  app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        blockAllMixedContent: true,
+        upgradeInsecureRequests: true,
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", 'https://img.discogs.com'],
+        objectSrc: ["'none'"]
+      }
+    })
+  )
 
-router.get('/artist/:artistId/page/:pageId', async (req, res, next) => {
-  const { artistId, pageId } = req.params
+  app.use('/', createRouter(app))
 
-  res.type('.html').write(header + nav)
-
-  // issue requests in parallel
-  const artistReq = requestData(urls.getArtist(artistId))
-  const releaseReq = requestData(urls.getArtistReleases(artistId, pageId))
-  const [artistData, releaseData] = await Promise.all([artistReq, releaseReq])
-
-  // return "Discogs down error"
-  if (artistData === null || releaseData === null) {
-    res.write('Oh noes, it looks like Discogs is down :-(')
-  }
-  // return "unknown artist error" if negative Discogs lookup
-  else if (
-    Object.keys(artistData).length === 1 ||
-    Object.keys(releaseData).length === 1
-  ) {
-    res.write("Oh noes, this artist doesn't exist :-(")
-  } else {
-    res.write(templates.artist(artistData))
-    res.write(templates.releaseList(releaseData, artistId))
-  }
-
-  res.write(foot)
-  res.end()
-})
-
-// master page
-router.get('/master/:masterId', async (req, res) => {
-  res.type('.html').write(header + nav)
-
-  const data = await requestData(urls.getMaster(req.params.masterId))
-
-  // return "Discogs down error"
-  if (data === null) {
-    res.write('Oh noes, it looks like Discogs is down :-(')
-  }
-  // return "unknown release error" if negative Discogs lookup
-  else if (Object.keys(data).length === 1) {
-    res.write("Oh noes, this release doesn't exist :-(")
-  } else {
-    res.write(templates.release(data))
-  }
-
-  res.write(foot)
-  res.end()
-})
-
-// release page
-router.get('/release/:releaseId', async (req, res) => {
-  res.type('.html').write(header + nav)
-
-  const data = await requestData(urls.getRelease(req.params.releaseId))
-
-  // return "Discogs down error"
-  if (data === null) {
-    res.write('Oh noes, it looks like Discogs is down :-(')
-  }
-  // return "unknown release error" if negative Discogs lookup
-  else if (Object.keys(data).length === 1) {
-    res.write("Oh noes, this release doesn't exist :-(")
-  } else {
-    res.write(templates.release(data))
-  }
-
-  res.write(foot)
-  res.end()
-})
-
-// search page
-router.post(
-  '/search',
-  [
-    sanitizeBody('query')
-      .trim()
-      .escape()
-  ],
-  (req, res) => {
-    const { query } = req.body
-
-    res.redirect(`/search/${query}/page/1`)
-    res.end()
-  }
-)
-
-// artist page
-router.get(
-  ['/search:query', '/search/:query/', '/search/:query/page/'],
-  async (req, res, next) => {
-    const { query } = req.params
-    res.redirect(`/search/${query}/page/1`)
-  }
-)
-
-router.get('/search/:query/page/:pageId', async (req, res) => {
-  const { query, pageId } = req.params
-
-  res.type('.html').write(header + nav)
-
-  const data = await requestData(urls.getArtistSearch(query, pageId))
-
-  // return "Discogs down error"
-  if (data === null) {
-    res.write('Oh noes, it looks like Discogs is down :-(')
-  } else {
-    res.write(templates.artistsSearchResults(data, query))
-  }
-
-  res.write(foot)
-  res.end()
-})
-
-// 404
-router.use((req, res) => {
-  res
-    .status(404)
-    .type('.html')
-    .write(header + nav)
-  res.write("Oh noes, the page you're looking for doesn't exist!")
-  res.write(foot)
-  res.end()
-})
-
-// 5xx
-router.use((err, req, res) => {
-  res
-    .status(500)
-    .type('.html')
-    .write(header + nav)
-
-  res.write('Server hiccup: ' + JSON.stringify({ error: err }))
-  res.write(foot)
-  res.end()
-})
-
-app.use('/', router)
-app.use('/.netlify/functions/server', router)
-
-export default app
-export const handler = serverless(app)
+  return app
+}

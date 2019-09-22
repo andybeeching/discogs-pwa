@@ -1,6 +1,7 @@
 import spdy from 'spdy'
 import fs from 'fs'
-import app from './server'
+import createServer from './server'
+import express from 'express'
 
 // development tools
 import webpack from 'webpack'
@@ -8,6 +9,9 @@ import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import config from '../../webpack.dev.config'
 
+const app = express()
+
+// Webpack HMR has to be instantiated before static path mapping
 if (app.get('env') === 'development') {
   console.log('DEVELOPMENT SERVER')
   // log requested urls
@@ -32,7 +36,7 @@ const spdyServer = spdy.createServer(
     key: fs.readFileSync(`${sslDir}/${process.env.SSL_KEY}`),
     cert: fs.readFileSync(`${sslDir}/${process.env.SSL_CERT}`)
   },
-  app
+  createServer(app)
 )
 
 // spin up server
