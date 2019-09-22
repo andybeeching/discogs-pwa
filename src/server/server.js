@@ -4,24 +4,25 @@ import compression from 'compression'
 import helmet from 'helmet'
 
 export default app => {
-  if (app.get('env') === 'development') {
-    // map statics - no caching
-    app.use(express.static(__dirname))
-  } else {
-    // map statics and apply caching
-    app.use(
-      serveStatic(__dirname, {
-        maxAge: 31536000,
-        immutable: true
-      })
-    )
+  app.use(express.static(__dirname))
+  // if (app.get('env') === 'development') {
+  //   // map statics - no caching
+  //   app.use(express.static(__dirname))
+  // } else {
+  //   // map statics and apply caching
+  //   app.use(
+  //     serveStatic(__dirname, {
+  //       maxAge: 31536000,
+  //       immutable: true
+  //     })
+  //   )
 
-    // caching rules for page responses
-    app.use((req, res, next) => {
-      res.set('Cache-Control', 'max-age=604800, must-revalidate')
-      next()
-    })
-  }
+  //   // caching rules for page responses
+  //   app.use((req, res, next) => {
+  //     res.set('Cache-Control', 'max-age=604800, must-revalidate')
+  //     next()
+  //   })
+  // }
 
   // gzip compression
   // - static assets are too small to benefit from Brotli
