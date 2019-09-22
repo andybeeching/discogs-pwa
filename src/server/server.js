@@ -2,7 +2,6 @@ import express from 'express'
 import serveStatic from 'serve-static'
 import compression from 'compression'
 import helmet from 'helmet'
-import createRouter from './routes'
 
 export default app => {
   if (app.get('env') === 'development') {
@@ -44,7 +43,9 @@ export default app => {
     })
   )
 
-  app.use('/', createRouter(app))
+  // parse POST data
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
 
   return app
 }

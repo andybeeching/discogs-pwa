@@ -1,6 +1,7 @@
 import spdy from 'spdy'
 import fs from 'fs'
 import createServer from './server'
+import createRouter from './routes'
 import express from 'express'
 
 // development tools
@@ -38,6 +39,8 @@ const spdyServer = spdy.createServer(
   },
   createServer(app)
 )
+
+app.use('/', createRouter(app.get('env')))
 
 // spin up server
 const PORT = process.env.PORT || 8080

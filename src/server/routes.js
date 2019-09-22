@@ -8,22 +8,18 @@ import head from 'raw-loader!../partials/head.html'
 import nav from 'raw-loader!../partials/nav.html'
 import foot from 'raw-loader!../partials/foot.html'
 
-export default app => {
+export default (env = 'production') => {
   let header = head
   // asset URL rewriting
   // - replace hydrated CSS and JS with latest build
-  if (app.get('env') !== 'development') {
+  if (env === 'production') {
     const { main } = stats.assetsByChunkName
     header = head.replace('main.css', main[0]).replace('main.js', main[1])
   }
 
-  // parse POST data
-  app.use(express.json())
-  app.use(express.urlencoded({ extended: true }))
-
-  // routes
   const router = express.Router()
 
+  // ROUTES
   router.get('/robots.txt', function(req, res) {
     res.type('text/plain')
     res.send('User-agent: *\nDisallow: /')
@@ -142,7 +138,7 @@ export default app => {
     }
   )
 
-  // artist page
+  // search page
   router.get(
     ['/search:query', '/search/:query/', '/search/:query/page/'],
     async (req, res, next) => {
