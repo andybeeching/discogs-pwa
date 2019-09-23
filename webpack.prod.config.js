@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 module.exports = {
   entry: {
@@ -72,6 +73,27 @@ module.exports = {
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, './src/sw.js')
     }),
-    new webpack.optimize.ModuleConcatenationPlugin()
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    // generate web manifest
+    new WebpackPwaManifest({
+      name: 'Discogs PWA',
+      inject: 'false',
+      short_name: 'Discogs PWA',
+      orientation: 'omit',
+      description: 'A PWA for exploring Discogs',
+      theme_color: '#333333',
+      background_color: '#ffffff',
+      crossorigin: null,
+      icons: [
+        {
+          src: path.resolve('./src/css/img/vinyl.svg'),
+          sizes: [36, 48, 72, 96, 120, 128, 152, 167, 180, 256, 384, 1024] // multiple sizes
+        },
+        {
+          src: path.resolve('./src/css/img/vinyl.png'),
+          sizes: [144, 512]
+        }
+      ]
+    })
   ]
 }

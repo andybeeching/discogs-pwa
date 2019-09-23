@@ -12,7 +12,9 @@ if (module.hot) {
 } else {
   // register service worker
   if ('serviceWorker' in navigator && !!runtime.register) {
-    window.addEventListener('load', runtime.register)
+    window.addEventListener('load', () => {
+      runtime.register()
+    })
   }
 }
 

@@ -12,9 +12,18 @@ export default (env = 'production') => {
   let header = head
   // asset URL rewriting
   // - replace hydrated CSS and JS with latest build
+  // - inject reference to fingerprinted manifest file
+  // - replace iOS touch icon with latest built version
   if (env === 'production') {
     const { main } = stats.assetsByChunkName
     header = head.replace('main.css', main[0]).replace('main.js', main[1])
+
+    const manifest = stats.assets.find(item => /manifest/.test(item.name)).name
+    header = header.replace('manifest.json', manifest)
+
+    const touchIcon = stats.assets.find(item => /icon_152x152/.test(item.name))
+      .name
+    header = header.replace('icon_152x152', touchIcon)
   }
 
   const router = express.Router()

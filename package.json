@@ -93,6 +93,7 @@
     "webpack-dev-middleware": "^3.7.1",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-hot-server-middleware": "^0.6.0",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "webpack-pwa-manifest": "^4.0.0"
   }
 }
