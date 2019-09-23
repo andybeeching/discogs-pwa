@@ -32,7 +32,7 @@ describe('index.js - in DOM', () => {
       // assert that loader is hidden
       const loaderEl = document.querySelector(constants.LOADER_SELECTOR)
       expect(loaderEl.classList.contains(constants.IS_SHOWN)).not.toBe(true)
-      expect(loaderEl.classList.contains(constants.IS_LOADED)).toBe(true)
+      expect(loaderEl.classList.contains(constants.IS_LOADED)).not.toBe(true)
       expect(loaderEl.classList.contains(constants.IS_HIDDEN)).toBe(true)
     })
 
@@ -51,7 +51,7 @@ describe('index.js - in DOM', () => {
       // assert that loader is hidden
       const loaderEl = document.querySelector(constants.LOADER_SELECTOR)
       expect(loaderEl.classList.contains(constants.IS_SHOWN)).not.toBe(true)
-      expect(loaderEl.classList.contains(constants.IS_LOADED)).toBe(true)
+      expect(loaderEl.classList.contains(constants.IS_LOADED)).not.toBe(true)
       expect(loaderEl.classList.contains(constants.IS_HIDDEN)).toBe(true)
     })
 

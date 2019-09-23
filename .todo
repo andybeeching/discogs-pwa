@@ -36,6 +36,7 @@ Front-End:
     ✔ Handle 4xx @done(19-09-16 14:40)
     ✔ Handle 5xx @done(19-09-16 15:34)
     ✔ Add lang and dir attribute @done(19-09-08 12:26)
+    ✔ History API integration @done(19-09-23 15:52)
 
 Back-end:
     ✔ Select host @done(19-09-20 21:41)
@@ -80,18 +81,18 @@ Improvements:
     ☐ Add Axe/pa11y-ci for a11y testing
     ☐ Strip dev comments from build (or use DEBUG env var)
     ☐ Winston vs Bunyan for logging
-    ☐ Rewrite query strings for URL slugs
+    ✔ Rewrite query strings for URL slugs @done(19-09-23 15:52)
     ☐ Figure out how to flush first html content from service worker
     ☐ Consider adding CI (for fun)
     ☐ Handle layout shift with
     ☐ Add preload links
     ☐ Review meta tags
     ☐ ARIA
-    ☐ History API integration
     ☐ Add mapping for URL slugs
     ☐ Add title to each page
     ☐ Make HMR and service workers in DEV work
     ✔ Ensure service worker registration doesn't block main thread @done(19-09-23 10:32)
+    ☐ ScrollToTop onPageLoad (but for older pages remember position?)
 
 Features:
     ☐ Enable album searching
