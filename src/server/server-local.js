@@ -1,7 +1,7 @@
 import spdy from 'spdy'
 import fs from 'fs'
 import createServer from './server'
-import createRouter from './routes'
+import createRouter from './router'
 import express from 'express'
 
 // development tools

@@ -1,6 +1,7 @@
 import request from 'supertest'
 import express from 'express'
 import createServer from './server.js'
+import createRouter from './router.js'
 import nock from 'nock'
 import { clearCache } from '../lib/apiClient'
 
@@ -37,6 +38,7 @@ describe('server.js', () => {
 
   beforeEach(() => {
     server = createServer(express())
+    server.use(createRouter())
   })
 
   afterEach(() => {

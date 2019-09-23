@@ -1,7 +1,7 @@
 import express from 'express'
 import serverless from 'serverless-http'
 import createServer from '../server/server'
-import createRouter from '../server/routes'
+import createRouter from '../server/router'
 
 const app = createServer(express())
 const router = createRouter()
