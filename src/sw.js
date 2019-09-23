@@ -53,8 +53,25 @@ self.addEventListener('fetch', function(evt) {
   // only triggered by html navigate (not asset requests)
   if (evt.request.mode === 'navigate') {
     evt.respondWith(pageResponse(evt))
+  } else if (/\.(css|js)$/.test(evt.request.url)) {
+    evt.respondWith(assetResponse(evt))
   }
 })
+
+// handle page requests
+// - cache-first-network pattern
+const assetResponse = async evt => {
+  const req = evt.request
+
+  try {
+    const fetchRes = fetch(req)
+    const cache = await caches.open(STATICS_CACHE)
+    return (await cache.match(evt.request, { ignoreVary: true })) || fetchRes
+  } catch (err) {
+    // TODO - display offline page instead...
+    console.log(err)
+  }
+}
 
 // handle page requests
 // - stale-while-revalidate pattern - relies on HTTP headers
