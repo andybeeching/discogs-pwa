@@ -16,9 +16,9 @@ export default app => {
       })
     )
 
-    // caching rules for page responses
+    // caching rules for page responses (1/2 day)
     app.use((req, res, next) => {
-      res.set('Cache-Control', 'max-age=604800, must-revalidate')
+      res.set('Cache-Control', 'max-age=43200, must-revalidate')
       next()
     })
   }
