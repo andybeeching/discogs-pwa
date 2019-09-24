@@ -5,15 +5,15 @@ Stack:
     ✔ Select CSS(-in-JS) framework @done(19-09-10 08:55)
     ✔ Select JS/templating framework @done(19-09-06 13:30)
     ✔ Add Babel for transpilation @done(19-09-04 15:40)
-    ☐ Bundle with webpack
+    ✔ Bundle with webpack @done(19-09-24 16:57)
         ✔ Impl separate dev + prod builds @done(19-09-10 08:55)
         ✔ Add middlewear hot relaoding @done(19-09-06 13:30)
-        ☐ Improve current watch setup (spawn subprocesses?)
+        ✔ Improve current watch setup (spawn subprocesses?) @done(19-09-24 16:57)
     ✔ Add test harness @done(19-09-04 15:40)
     ✔ Add Husky hooks @done(19-09-16 17:03)
     ✔ Add HMR @done(19-09-06 13:29)
     ✔ Figure out remote debugging for node, and front-end @done(19-09-18 15:36)
-    ☐ Tidy up git commit history
+    ✔ Tidy up git commit history @done(19-09-24 16:35)
     ✔ Add .editconfig @done(19-09-08 15:04)
     ✘ Enable HRM with MiniCssExtractPlugin @cancelled(19-09-10 11:22)
     ☐ Write README
