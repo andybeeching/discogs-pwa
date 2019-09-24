@@ -30,7 +30,7 @@ async function apiClient(url) {
   const res = await fetch(url, {
     method: 'get',
     headers: {
-      Authorization: `Discogs key=${process.env.APIKEY}, secret=${process.env.APISECRET}`,
+      Authorization: `Discogs key=${process.env.API_KEY}, secret=${process.env.API_SECRET}`,
       'User-Agent': process.env.USER_AGENT,
       Accept: 'application/vnd.discogs.v2.discogs+json'
     }
