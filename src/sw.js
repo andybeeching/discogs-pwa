@@ -1,14 +1,14 @@
 // Cache strategy
-// - html pages in latest cache, stale-while-revalidate
-// - static assets in separate cache
+// - html pages: stale-while-revalidate
+// - static assets: cache-on-install
 // - `serviceWorkerOption` injected from Webpack conf
 const CACHE_NAME = new Date().toISOString()
 const STATICS_CACHE = 'statics-cache-v1'
 const STATICS_PATHS = [...serviceWorkerOption.assets]
 
-self.addEventListener('install', evt => {
+self.addEventListener('install', async evt => {
   console.log('[SW] Install event')
-  evt.waitUntil(
+  await evt.waitUntil(
     (async () => {
       try {
         const cache = await caches.open(STATICS_CACHE)
@@ -21,14 +21,16 @@ self.addEventListener('install', evt => {
       }
     })()
   )
+
+  return self.skipWaiting()
 })
 
 // activated when replacing an old SW
-self.addEventListener('activate', function(evt) {
+self.addEventListener('activate', async evt => {
   console.log('[SW] Activate event')
   var whitelist = [CACHE_NAME, STATICS_CACHE]
 
-  evt.waitUntil(
+  await evt.waitUntil(
     (async () => {
       const cacheNames = await caches.keys()
 
@@ -43,6 +45,8 @@ self.addEventListener('activate', function(evt) {
       )
     })()
   )
+
+  return self.clients.claim()
 })
 
 // fetch (on page refresh, navigation)
@@ -50,16 +54,17 @@ self.addEventListener('activate', function(evt) {
 // - static resources already cached
 // - Discogs statics (images) cached by browser as opaque resources
 self.addEventListener('fetch', function(evt) {
-  // only triggered by html navigate (not asset requests)
-  if (evt.request.mode === 'navigate') {
-    evt.respondWith(pageResponse(evt))
-  } else if (/\.(css|js)$/.test(evt.request.url)) {
+  const { url, method } = evt.request
+
+  if (/\.(css|js)$/.test(url)) {
     evt.respondWith(assetResponse(evt))
+  } else if (method === 'GET') {
+    evt.respondWith(pageResponse(evt))
   }
 })
 
-// handle page requests
-// - cache-first-network pattern
+// handle asset requests
+// - cache-fallback-network pattern
 const assetResponse = async evt => {
   const req = evt.request
 
@@ -84,6 +89,7 @@ const pageResponse = async evt => {
     const fetchRes = fetch(req)
     const fetchResClone = fetchRes.then(res => res.clone())
 
+    // initial cache and revalidate part
     // keep service worker alive until resource cached
     evt.waitUntil(
       (async () => {
