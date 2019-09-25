@@ -6,7 +6,7 @@ const PREFIX = 'https://api.discogs.com'
  * Returns API URL for homepage
  */
 export function getRoot() {
-  return `${PREFIX}/database/search?sort=hot%2Cdesc&ev=em_tr&year=2019&format=Vinyl`
+  return `${PREFIX}/database/search?sort=want%2Cdesc&q=&type=master`
 }
 
 /**

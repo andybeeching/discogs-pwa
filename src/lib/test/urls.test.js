@@ -3,7 +3,7 @@ import * as urls from '../urls'
 describe('API URLs - urls.js', () => {
   describe('Root Details', () => {
     test('URL contains "hot"', () => {
-      expect(urls.getRoot()).toEqual(expect.stringMatching(String('hot')))
+      expect(urls.getRoot()).toEqual(expect.stringMatching(String('want')))
     })
   })
 

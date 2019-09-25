@@ -11,9 +11,9 @@ const trim = str => rbl(str).trim()
  */
 export function root(data) {
   return trim(`
-    <h2>Currently trending on Discogs</h2>
+    <h2>Popular on Discogs</h2>
     <ul class="grid">
-      ${data.results.map(item => getGridItem(item, 'release')).join('')}
+      ${data.results.map(item => getGridItem(item, item.type)).join('')}
     </ul>
   `)
 }

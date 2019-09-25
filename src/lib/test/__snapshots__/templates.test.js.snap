@@ -146,7 +146,7 @@ exports[`templates.js releaseList() should render "release list" template 1`] = 
 `;
 
 exports[`templates.js root() should render "root" template 1`] = `
-"<h2>Currently trending on Discogs</h2>
+"<h2>Popular on Discogs</h2>
     <ul class=\\"grid\\">
     <li class=\\"grid-item\\">
       <a href=\\"/release/13486052\\">
