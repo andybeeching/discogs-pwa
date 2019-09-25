@@ -1,7 +1,8 @@
 import rbl from 'remove-blank-lines'
-import offlineImg from '../img/relax.gif'
-import fourOhFourImg from '../img/404.gif'
-import fiveOhOhImg from '../img/500.gif'
+
+const offlineImg = '/relax.gif'
+const fourOhFourImg = '/404.gif'
+const fiveOhOhImg = '/500.gif'
 
 // removes superflous line breaks and leading/trailing whitespace
 const trim = str => rbl(str).trim()

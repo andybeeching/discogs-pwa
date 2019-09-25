@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build:prod"
+  command = "npm run netlify:prod"
   functions = "functions"
   publish = "dist"
 
@@ -30,5 +30,11 @@
 [[redirects]]
   from = "/search/*"
   to = "/.netlify/functions/server/search:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/offline"
+  to = "/.netlify/functions/server/offline"
   status = 200
   force = true

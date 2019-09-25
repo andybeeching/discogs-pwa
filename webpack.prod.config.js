@@ -6,6 +6,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -94,6 +95,14 @@ module.exports = {
           sizes: [144, 512]
         }
       ]
-    })
+    }),
+    // copies gifs for error pages to dist folder
+    new CopyPlugin([
+      {
+        from: './src/img',
+        to: './',
+        toType: 'dir'
+      }
+    ])
   ]
 }

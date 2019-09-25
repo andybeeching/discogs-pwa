@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -102,6 +103,14 @@ module.exports = {
           sizes: [144, 512]
         }
       ]
-    })
+    }),
+    // copies gifs for error pages to dist folder
+    new CopyPlugin([
+      {
+        from: './src/img',
+        to: './',
+        toType: 'dir'
+      }
+    ])
   ]
 }

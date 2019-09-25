@@ -11,7 +11,7 @@
     "start:dev": "mkdir -p dist && npm run build:app:dev && concurrently \"npm run watch:server:dev\" \"NODE_ENV=development nodemon ./dist/server.js --verbose\"",
     "start:prod": "mkdir -p dist && npm run build:app:prod && npm run build:server:prod && NODE_ENV=production node ./dist/server.js",
     "netlify": "netlify-lambda build ./src/lambda",
-    "netlify:prod": "mkdir -p dist && npm run build:app:prod && npm run netlify:build",
+    "netlify:prod": "mkdir -p dist && npm run build:app:prod && npm run netlify",
     "lint": "eslint src -c .eslintrc.json --ext js",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest"
@@ -54,6 +54,7 @@
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^4.1.2",
+    "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^3.2.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.2.0",

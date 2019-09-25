@@ -96,21 +96,21 @@ exports[`templates.js getPagination() should handle middle page pagination objec
 exports[`templates.js offline() should render offline template 1`] = `
 "<p>Unfotunately this page is not available offline. Best go spin some vinyl...</p>
       <div>
-          </div><img src=\\"test-file-stub\\" class=\\"artwork\\" />
+          </div><img src=\\"/relax.gif\\" class=\\"artwork\\" />
       </div>"
 `;
 
 exports[`templates.js page404() should render 404 page template 1`] = `
 "<p>Oh noes, the page you're looking for doesn't exist! Try looking later...</p>
       <div>
-          </div><img src=\\"test-file-stub\\" class=\\"artwork\\" />
+          </div><img src=\\"/404.gif\\" class=\\"artwork\\" />
       </div>"
 `;
 
 exports[`templates.js page500() should render 500 page template 1`] = `
 "<p>Server hiccup. Nothing to see here...</p>
       <div>
-          </div><img src=\\"test-file-stub\\" class=\\"artwork\\" />
+          </div><img src=\\"/500.gif\\" class=\\"artwork\\" />
       </div>"
 `;
 
