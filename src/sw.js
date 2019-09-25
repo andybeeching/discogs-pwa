@@ -6,6 +6,9 @@ const CACHE_NAME = new Date().toISOString()
 const STATICS_CACHE = 'statics-cache-v1'
 const STATICS_PATHS = [...serviceWorkerOption.assets]
 
+// DOESN'T match discog img urls
+const NOT_DISCOGS_IMG_REGEXP = /^((?!https:\/\/img.discogs.com).)*$/
+
 self.addEventListener('install', async evt => {
   console.log('[SW] Install event')
   await evt.waitUntil(
@@ -56,9 +59,9 @@ self.addEventListener('activate', async evt => {
 self.addEventListener('fetch', function(evt) {
   const { url, method } = evt.request
 
-  if (/\.(css|js)$/.test(url)) {
+  if (/\.(css|js|svg)$/.test(url)) {
     evt.respondWith(assetResponse(evt))
-  } else if (method === 'GET') {
+  } else if (NOT_DISCOGS_IMG_REGEXP.test(url) && method === 'GET') {
     evt.respondWith(pageResponse(evt))
   }
 })
