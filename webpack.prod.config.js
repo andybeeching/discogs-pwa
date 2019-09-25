@@ -96,7 +96,7 @@ module.exports = {
         }
       ]
     }),
-    // copies gifs for error pages to dist folder
+    // copies gifs+favicons for error pages to dist folder
     new CopyPlugin([
       {
         from: './src/img',
