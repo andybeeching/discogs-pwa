@@ -189,7 +189,7 @@ export default (env = 'production') => {
       .status(404)
       .type('.html')
       .write(header + nav)
-    res.write("Oh noes, the page you're looking for doesn't exist!")
+    res.write(templates.page404())
     res.write(foot)
     res.end()
   })

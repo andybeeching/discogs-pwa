@@ -24,6 +24,13 @@ describe('templates.js', () => {
     })
   })
 
+  describe('page404()', () => {
+    it('should render 404 page template', () => {
+      const renderedTemplate = templates.page404()
+      expect(renderedTemplate).toMatchSnapshot()
+    })
+  })
+
   describe('artistsSearchResults()', () => {
     const SEARCH_TERM = 'The Beatles'
 
