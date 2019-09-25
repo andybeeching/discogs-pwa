@@ -18,7 +18,7 @@ module.exports = {
   },
   mode: 'production',
   target: 'web',
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
