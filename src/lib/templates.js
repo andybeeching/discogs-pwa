@@ -1,4 +1,5 @@
 import rbl from 'remove-blank-lines'
+import offlineImg from '../img/relax.gif'
 
 // removes superflous line breaks and leading/trailing whitespace
 const trim = str => rbl(str).trim()
@@ -210,4 +211,17 @@ export function release(data) {
         ${tracklist.map(item => `<li>${item.title}</a>`).join('')}
     </ol>
   `)
+}
+
+/**
+ * Renders the offline page
+ */
+export function offline() {
+  return trim(
+    `<p>Unfotunately this page is not available offline. Best go spin some vinyl...</p>
+      <div>
+          </div><img src="${offlineImg}" class="artwork" />
+      </div>
+      `
+  )
 }

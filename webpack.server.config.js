@@ -30,6 +30,18 @@ module.exports = {
           failOnError: false,
           failOnWarning: false
         }
+      },
+      {
+        test: /\.gif$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+              // emitFile: false
+            }
+          }
+        ]
       }
     ]
   }

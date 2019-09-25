@@ -9,13 +9,13 @@ import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 
 if (module.hot) {
   module.hot.accept() // eslint-disable-line no-undef
-} else {
-  // register service worker
-  if ('serviceWorker' in navigator && !!runtime.register) {
-    window.addEventListener('load', () => {
-      runtime.register()
-    })
-  }
+}
+
+// register service worker
+if ('serviceWorker' in navigator && runtime && runtime.register) {
+  window.addEventListener('load', () => {
+    runtime.register()
+  })
 }
 
 /**
@@ -115,6 +115,7 @@ const createApp = () => {
       }
       hideLoader()
     } catch (err) {
+      // window.location.href = '/offline'
       console.log(err)
       hideLoader()
     }

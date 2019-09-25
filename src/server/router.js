@@ -4,6 +4,7 @@ import stats from '../../dist/stats.json'
 import requestData from '../lib/apiClient.js'
 import * as templates from '../lib/templates.js'
 import * as urls from '../lib/urls.js'
+
 import head from 'raw-loader!../partials/head.html'
 import nav from 'raw-loader!../partials/nav.html'
 import foot from 'raw-loader!../partials/foot.html'
@@ -23,7 +24,7 @@ export default (env = 'production') => {
 
     const touchIcon = stats.assets.find(item => /icon_152x152/.test(item.name))
       .name
-    header = header.replace('icon_152x152', touchIcon)
+    header = header.replace('icon_152x152.svg', touchIcon)
   }
 
   const router = express.Router()
@@ -170,6 +171,14 @@ export default (env = 'production') => {
       res.write(templates.artistsSearchResults(data, query))
     }
 
+    res.write(foot)
+    res.end()
+  })
+
+  // offline page
+  router.get('/offline', (req, res) => {
+    res.type('.html').write(header + nav)
+    res.write(templates.offline())
     res.write(foot)
     res.end()
   })

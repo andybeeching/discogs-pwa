@@ -72,6 +72,16 @@ describe('server.js', () => {
     })
   })
 
+  describe('GET /offline', () => {
+    it('responds with the offline page', async () => {
+      await request(server)
+        .get('/offline')
+        .set('Accept', 'text/plain')
+        .expect('Content-Type', /text/)
+        .expect(200)
+    })
+  })
+
   describe('GET /', () => {
     it('responds with "Discogs down: for API 500 error', async () => {
       // mock Discogs API

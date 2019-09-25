@@ -2,9 +2,10 @@
 // - html pages: stale-while-revalidate
 // - static assets: cache-on-install
 // - `serviceWorkerOption` injected from Webpack conf
+const OFFLINE_URL = '/offline'
 const CACHE_NAME = new Date().toISOString()
 const STATICS_CACHE = 'statics-cache-v1'
-const STATICS_PATHS = [...serviceWorkerOption.assets]
+const STATICS_PATHS = [OFFLINE_URL, '/relax.gif', ...serviceWorkerOption.assets]
 
 // DOESN'T match discog img urls
 const NOT_DISCOGS_IMG_REGEXP = /^((?!https:\/\/img.discogs.com).)*$/
@@ -56,10 +57,10 @@ self.addEventListener('activate', async evt => {
 // - filters only for html
 // - static resources already cached
 // - Discogs statics (images) cached by browser as opaque resources
-self.addEventListener('fetch', function(evt) {
+self.addEventListener('fetch', evt => {
   const { url, method } = evt.request
 
-  if (/\.(css|js|svg)$/.test(url)) {
+  if (/\.(css|js|svg|gif)$/.test(url)) {
     evt.respondWith(assetResponse(evt))
   } else if (NOT_DISCOGS_IMG_REGEXP.test(url) && method === 'GET') {
     evt.respondWith(pageResponse(evt))
@@ -72,11 +73,12 @@ const assetResponse = async evt => {
   const req = evt.request
 
   try {
-    const fetchRes = fetch(req)
     const cache = await caches.open(STATICS_CACHE)
-    return (await cache.match(evt.request, { ignoreVary: true })) || fetchRes
+    return (
+      (await cache.match(evt.request, { ignoreVary: true })) ||
+      (await fetch(req))
+    )
   } catch (err) {
-    // TODO - display offline page instead...
     console.log(err)
   }
 }
@@ -105,14 +107,14 @@ const pageResponse = async evt => {
         }
 
         const cache = await caches.open(CACHE_NAME)
-        cache.put(req, res)
+        await cache.put(req, res)
         console.log(`[SW] Cache asset: ${new URL(req.url).href}`)
       })()
     )
 
-    return (await caches.match(req, { ignoreVary: true })) || fetchRes
+    // try cache first, falling back to network
+    return (await caches.match(req, { ignoreVary: true })) || (await fetchRes)
   } catch (err) {
-    // TODO - display offline page instead...
-    console.log(err)
+    return caches.match(OFFLINE_URL)
   }
 }

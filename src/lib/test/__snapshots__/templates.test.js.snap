@@ -93,6 +93,13 @@ exports[`templates.js getPagination() should handle middle page pagination objec
   "
 `;
 
+exports[`templates.js offline() should render offline template 1`] = `
+"<p>Unfotunately this page is not available offline. Best go spin some vinyl...</p>
+      <div>
+          </div><img src=\\"test-file-stub\\" class=\\"artwork\\" />
+      </div>"
+`;
+
 exports[`templates.js release() should render "release" template 1`] = `
 "<h2 class=\\"h2\\">Quiet Is The New Loud</h2>
     <p>By <a href=\\"/artist/12634/page/1\\">Kings Of Convenience</a></p>

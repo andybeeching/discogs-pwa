@@ -17,6 +17,13 @@ describe('templates.js', () => {
     })
   })
 
+  describe('offline()', () => {
+    it('should render offline template', () => {
+      const renderedTemplate = templates.offline()
+      expect(renderedTemplate).toMatchSnapshot()
+    })
+  })
+
   describe('artistsSearchResults()', () => {
     const SEARCH_TERM = 'The Beatles'
 
