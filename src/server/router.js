@@ -195,13 +195,12 @@ export default (env = 'production') => {
   })
 
   // 5xx
-  router.use((err, req, res) => {
+  router.use((req, res) => {
     res
       .status(500)
       .type('.html')
       .write(header + nav)
-
-    res.write('Server hiccup: ' + JSON.stringify({ error: err }))
+    res.write(templates.page500())
     res.write(foot)
     res.end()
   })

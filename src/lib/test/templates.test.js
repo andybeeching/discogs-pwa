@@ -31,6 +31,13 @@ describe('templates.js', () => {
     })
   })
 
+  describe('page500()', () => {
+    it('should render 500 page template', () => {
+      const renderedTemplate = templates.page500()
+      expect(renderedTemplate).toMatchSnapshot()
+    })
+  })
+
   describe('artistsSearchResults()', () => {
     const SEARCH_TERM = 'The Beatles'
 

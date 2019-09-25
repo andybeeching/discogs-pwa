@@ -107,6 +107,13 @@ exports[`templates.js page404() should render 404 page template 1`] = `
       </div>"
 `;
 
+exports[`templates.js page500() should render 500 page template 1`] = `
+"<p>Server hiccup. Nothing to see here...</p>
+      <div>
+          </div><img src=\\"test-file-stub\\" class=\\"artwork\\" />
+      </div>"
+`;
+
 exports[`templates.js release() should render "release" template 1`] = `
 "<h2 class=\\"h2\\">Quiet Is The New Loud</h2>
     <p>By <a href=\\"/artist/12634/page/1\\">Kings Of Convenience</a></p>

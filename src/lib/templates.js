@@ -1,6 +1,7 @@
 import rbl from 'remove-blank-lines'
 import offlineImg from '../img/relax.gif'
 import fourOhFourImg from '../img/404.gif'
+import fiveOhOhImg from '../img/500.gif'
 
 // removes superflous line breaks and leading/trailing whitespace
 const trim = str => rbl(str).trim()
@@ -235,6 +236,19 @@ export function page404() {
     `<p>Oh noes, the page you're looking for doesn't exist! Try looking later...</p>
       <div>
           </div><img src="${fourOhFourImg}" class="artwork" />
+      </div>
+      `
+  )
+}
+
+/**
+ * Renders the 500 page
+ */
+export function page500() {
+  return trim(
+    `<p>Server hiccup. Nothing to see here...</p>
+      <div>
+          </div><img src="${fiveOhOhImg}" class="artwork" />
       </div>
       `
   )
