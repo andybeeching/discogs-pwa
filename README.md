@@ -1,7 +1,7 @@
 # Discogs PWA
 
 A PWA app to explore the [Discogs](https://discogs.com) universe. You can see it
-running here: https://discogs-pwa.netlify.com
+running here: https://discogs-pwa.netlify.app
 
 ## Local Installation
 
